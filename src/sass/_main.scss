@@ -7,9 +7,9 @@
   
 }
 
-.card .card__item {
-  outline: 1px solid red; 
-}
+// .card .card__item {
+//   outline: 1px solid red; 
+// }
 
 @media screen and (min-width: 768px){
  .card .card__item{
@@ -30,12 +30,26 @@
   }
 }
 
+.card__img{
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
 .card__title{
     // font-family: 'Roboto';
     font-style: normal;
     font-weight: 500;
-    font-size: 12px;
-    line-height: 14px;
+    font-size: 20px;
+    line-height: 1.2;
     text-transform: uppercase;
     color: #000000;
+}
+
+.card__desc {
+    // font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.2;
+    color: #FF6B08;
 }
