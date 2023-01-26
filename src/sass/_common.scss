@@ -8,6 +8,10 @@
 *::before {
   box-sizing: inherit;
 }
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
 /* Стили для обнуления верхних отступов у элементов */
 h1,
 h2,
