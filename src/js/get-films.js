@@ -4,18 +4,20 @@ import { CURRENT_MOVIES, WATCHE, QUEUE, watche, queue } from './local.js';
 const card = document.querySelector('.card');
 function createMovieCard(data) {
   const mov = data
-    .map(({ poster_path, name, title, genre_ids, overview, release_date }) => {
-      return `<li class="card__item list">
+    .map(
+      ({ poster_path, name, title, genre_ids, overview, release_date, id }) => {
+        return `<li class="card__item list" id="${id}">
             <img src="https://image.tmdb.org/t/p/w500/${poster_path}" alt="" class="card__img" />
             <h2 class="card__title">${name ?? title}</h2>
             <p class="card__desc">Genres: ${genre_ids} | ${release_date.substr(0,4)}</p>
             </li>`;
-    })
+      }
+    )
     .join('');
   return mov;
 }
-
-getFetchMovies().then(res => {
+let page = 1;
+getFetchMovies(page).then(res => {
   localStorage.setItem(CURRENT_MOVIES, JSON.stringify(res.results));
   card.insertAdjacentHTML(
     'beforeend',
