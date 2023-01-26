@@ -1,6 +1,6 @@
 import { fetchMovies } from './fetchMovie';
 import { CURRENT_MOVIES, WATCHE, QUEUE, watche, queue } from './local';
-const form = document.querySelector('.search-form');
+const form = document.querySelector('.form-js');
 
 //search//
 
