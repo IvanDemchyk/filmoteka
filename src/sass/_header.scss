@@ -1,17 +1,144 @@
 .page-header {
+    max-width: 320px;
+    height: 230px;
+    margin-left: auto;
+    margin-right: auto;
 
-    background-image: url(../images/header-1-desktop.jpg);
+    background-color: #000000;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-1-mobile.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
 }
 
+.page-header__container {
+    padding-top: 40px;
+    padding-bottom: 44px;
+}
+
 .page-header__logo-icon {
+
+    display: inline-block;
     width: 24px;
     height: 24px;
 }
 
-.form__search {
-    width: 14px;
-    height: 14px;
+.page-header__logo-title {
+    display: none;
+}
+
+.page-header__navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 54px;
+}
+
+.page-nav__list {
+    list-style: none;
+    display: flex;
+}
+
+.page-nav__item_home {
+    margin-right: 40px;
+}
+
+.page-nav__link {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    color: #FFFFFF;
+}
+
+.current {
+    border-bottom: 3px solid #FF001B;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-input {
+    border: none;
+    background-color: transparent;
+    color: #FFFFFF;
+    font-size: 12px;
+    line-height: 1.33;
+    font-weight: 400;
+    width: 280px;
+    border-bottom: 0.5px solid #FFFFFF;
+
+
+    &::placeholder {
+        color: #FFFFFF;
+        font-size: 14px;
+        line-height: 1.14;
+        font-weight: 400;
+    }
+
+}
+
+.form__btn {
+    background-color: transparent;
+    border: none;
+    margin-left: -24px;
+}
+
+.form__notification {
+    margin-top: 16px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    color: #FF001B;
+}
+
+@media screen and (min-width: 768px) {
+    .page-header {
+        max-width: 768px;
+        height: 216px;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-1-tablet.jpg);
+
+    }
+
+    .page-header__logo-icon {
+        margin-right: 8px;
+    }
+
+    .page-header__logo-title {
+        display: inline-block;
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 35px;
+        color: #FFFFFF;
+    }
+}
+
+.form-input {
+    width: 336px;
+}
+
+.page-header__navigation {
+    margin-bottom: 40px;
+}
+
+.form__notification {
+    margin-top: 20px;
+}
+
+@media screen and (min-width: 1280px) {
+    .page-header {
+        max-width: 1280px;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-1-desktop.jpg);
+    }
+
+    .form-input {
+        width: 394px;
+    }
+
 }
