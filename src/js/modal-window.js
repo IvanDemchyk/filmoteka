@@ -70,7 +70,9 @@ function closeModal(e) {
 }
 
 function addFilmToWatched(e) {
-  console.log(e.currentTarget.textContent);
+  // console.log(e.currentTarget.textContent);
+  // if (e.currentTarget.textContent === 'add to watched') {
+  // }
   e.currentTarget.textContent === 'add to watched'
     ? (e.currentTarget.textContent = 'remove from watched')
     : (e.currentTarget.textContent = 'add to watched');
