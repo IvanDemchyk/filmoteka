@@ -9,13 +9,17 @@ function createMovieCard(data) {
         return `<li class="card__item list" id="${id}">
             <img src="https://image.tmdb.org/t/p/w500/${poster_path}" alt="" class="card__img" />
             <h2 class="card__title">${name ?? title}</h2>
-            <p class="card__desc">Genres: ${genre_ids} | ${release_date.substr(0,4)}</p>
+            <p class="card__desc">Genres: ${genre_ids} | ${release_date.substr(
+          0,
+          4
+        )}</p>
             </li>`;
       }
     )
     .join('');
   return mov;
 }
+
 let page = 1;
 getFetchMovies(page).then(res => {
   localStorage.setItem(CURRENT_MOVIES, JSON.stringify(res.results));
