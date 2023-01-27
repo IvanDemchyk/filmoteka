@@ -1,31 +1,10 @@
-console.log('get-films');
-import { createMovieCard } from './createMovieCard.js';
-import { getfetchTrends } from './api-films.js';
-import { CURRENT_MOVIES, WATCHE, QUEUE, watche, queue } from './local.js';
-import { card } from './local';
-let page = 1;
-async function render(page) {
-  const data = await getfetchTrends(page);
-  localStorage.setItem(CURRENT_MOVIES, JSON.stringify(data));
-  card.innerHTML = createMovieCard(
-    JSON.parse(localStorage.getItem(CURRENT_MOVIES)).results
-  );
-}
-render(page);
-
-//Додаю сюди для перевірки функціоналу, поки без підключення
-//Модальне вікно
-card.addEventListener('click', showMovie);
-
 const backdrop = document.querySelector('.backdrop');
-console.log(backdrop);
 const modalMovie = document.querySelector('.modal__movie');
 backdrop.addEventListener('click', closeModal);
 
 function showMovie(e) {
   const movieId = Number(e.target.parentElement.id);
-
-  const film = JSON.parse(localStorage.getItem(CURRENT_MOVIES)).results.find(
+  const film = JSON.parse(localStorage.getItem(CURRENT_MOVIES)).find(
     movie => movie.id === movieId
   );
   backdrop.hidden = false;
@@ -34,7 +13,7 @@ function showMovie(e) {
 
 function createMovieInfo(movie) {
   const modalMovieMarkup = `
-  <img class='movie__img' alt="movie poster" src="https://image.tmdb.org/t/p/w500/${
+  <img class='movie__img' alt="movie poster" src=""https://image.tmdb.org/t/p/w500/${
     movie.poster_path
   }" width="375" height="478"/>
       <div class="movie__info">
@@ -85,12 +64,13 @@ function createMovieInfo(movie) {
 }
 
 function closeModal(e) {
-  if (e.target.parentElement.nodeName === 'BODY') {
+  if (e.target.parentElement.nodeName === 'MAIN') {
     backdrop.hidden = true;
   }
 }
 
 function addFilmToWatched(e) {
+  console.log(e.currentTarget.textContent);
   e.currentTarget.textContent === 'add to watched'
     ? (e.currentTarget.textContent = 'remove from watched')
     : (e.currentTarget.textContent = 'add to watched');
