@@ -17,10 +17,12 @@ async function inputRequest(e) {
     page = 1;
     const data = await fetchMovies(page, request);
     if (data.results.length === 0) {
-      notif.style.visibility = '';
+      console.dir(notif.style.visibility);
+      notif.style.visibility = 'visible';
+      console.dir(notif.style.visibility);
       setTimeout(() => {
         notif.style.visibility = 'hidden';
-      }, 3000);
+      }, 10000);
       return;
     }
     localStorage.setItem(CURRENT_MOVIES, JSON.stringify(data));
