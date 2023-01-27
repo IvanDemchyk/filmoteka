@@ -3,7 +3,7 @@ import { createMovieCard } from './createMovieCard.js';
 import { getfetchTrends } from './api-films.js';
 import { CURRENT_MOVIES, WATCHE, QUEUE, watche, queue } from './local.js';
 import { card } from './local';
-import globalRequest from './searchRequest';
+import { globalRequest } from './searchRequest';
 console.log(globalRequest);
 let page = 1;
 let btnActionWatch = 'add to watched';
