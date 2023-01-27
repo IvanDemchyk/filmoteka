@@ -1,4 +1,4 @@
-const GENRES_MOVIES = 'genres';
+console.log('genres');const GENRES_MOVIES = 'genresList';
 const fetchedGenres = () => {
   return fetch(
     `https://api.themoviedb.org/3/genre/movie/list?api_key=e8369cced440ebe3b010b622661df24b&language=en-US`
@@ -9,9 +9,9 @@ fetchedGenres().then(onFetchSuccess);
 
 function onFetchSuccess(respond) {
   console.log(respond.genres);
-  const genres = respond.genres.reduce((acc, { id, name }) => {
+  const genresList = respond.genres.reduce((acc, { id, name }) => {
     acc[id] = name;
     return acc;
   }, {});
-  localStorage.setItem(GENRES_MOVIES, JSON.stringify(genres));
-};
+  localStorage.setItem(GENRES_MOVIES, JSON.stringify(genresList));
+}
