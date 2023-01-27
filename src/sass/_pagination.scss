@@ -1,0 +1,49 @@
+.js-pagination {
+  display: flex;
+  margin-top: 60px;
+  margin-bottom: 60px;
+
+  justify-content: center;
+  gap: 10px;
+
+  height: 40px;
+
+  @media (max-width:767px) {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+}
+
+.js-pagination li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 40px;
+  height: 40px;
+
+  font-size: 12px;
+  font-weight: 500;
+  color: #000000;
+  cursor: pointer;
+
+  border-radius: 5px;
+}
+
+.js-pagination li.active {
+  background-color: #FF6B08;
+  color: #FFFFFF;
+}
+
+.js-pagination li.arrows {
+  background-color: #F7F7F7;
+}
+
+@media (max-width:767px) {
+
+  .js-pagination li.dots,
+  .js-pagination li.firstInt,
+  .js-pagination li.lastInt {
+    display: none;
+  }
+}
