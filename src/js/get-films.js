@@ -3,7 +3,9 @@ import { createMovieCard } from './createMovieCard.js';
 import { getfetchTrends } from './api-films.js';
 import { CURRENT_MOVIES, WATCHE, QUEUE, watche, queue } from './local.js';
 import { card } from './local';
+
 let page = 1;
+let btnActionWatch = 'add to watched';
 async function render(page) {
   const data = await getfetchTrends(page);
   localStorage.setItem(CURRENT_MOVIES, JSON.stringify(data));
@@ -29,10 +31,10 @@ function showMovie(e) {
     movie => movie.id === movieId
   );
   backdrop.hidden = false;
-  createMovieInfo(film);
+  createMovieInfo(film, btnActionWatch);
 }
 
-function createMovieInfo(movie) {
+function createMovieInfo(movie, btnAction = 'add to watched') {
   const modalMovieMarkup = `
   <img class='movie__img' alt="movie poster" src="https://image.tmdb.org/t/p/w500/${
     movie.poster_path
@@ -69,7 +71,7 @@ function createMovieInfo(movie) {
           <h3 class="movie__about">About</h3>
       <p class="movie__description">${movie.overview}</p>
       <div class="modal-window__buttons">
-        <button class="movie__btn movie__btn--watched">add to watched</button>
+        <button class="movie__btn movie__btn--watched">${btnAction}</button>
         <button class="movie__btn movie__btn--queue">add to queue</button>
       </div>
       </div>`;
@@ -90,14 +92,42 @@ function closeModal(e) {
   }
 }
 
+function addLocalStorageWatcheOrQueue(local, key, event, btn) {
+  const film = JSON.parse(localStorage.getItem(CURRENT_MOVIES));
+
+  const titleFilm =
+    event.target.parentElement.parentElement.firstElementChild.textContent;
+  const getFilms = film.results.find(movie => movie.title === titleFilm);
+
+  local.push(getFilms);
+  localStorage.setItem(key, JSON.stringify(local));
+  event.currentTarget.textContent = `remove from ${btn}`;
+}
+
+function removeLocalStorageWatcheOrQueue(key, event, local, btn) {
+  const film = JSON.parse(localStorage.getItem(key));
+  const titleFilm =
+    event.currentTarget.parentElement.parentElement.firstElementChild
+      .textContent;
+  film.forEach((el, i) => {
+    el.title === titleFilm ? local.splice(i, 1) : el;
+  });
+  localStorage.setItem(key, JSON.stringify(local));
+  event.currentTarget.textContent = `add to ${btn}`;
+}
+
 function addFilmToWatched(e) {
-  e.currentTarget.textContent === 'add to watched'
-    ? (e.currentTarget.textContent = 'remove from watched')
-    : (e.currentTarget.textContent = 'add to watched');
+  if (e.currentTarget.textContent === 'add to watched') {
+    addLocalStorageWatcheOrQueue(watche, WATCHE, e, 'watched');
+  } else if (e.currentTarget.textContent === 'remove from watched') {
+    removeLocalStorageWatcheOrQueue(WATCHE, e, watche, 'watched');
+  }
 }
 
 function addFilmToQueue(e) {
-  e.currentTarget.textContent === 'add to queue'
-    ? (e.currentTarget.textContent = 'remove from queue')
-    : (e.currentTarget.textContent = 'add to queue');
+  if (e.currentTarget.textContent === 'add to queue') {
+    addLocalStorageWatcheOrQueue(queue, QUEUE, e, 'queue');
+  } else if (e.currentTarget.textContent === 'remove from queue') {
+    removeLocalStorageWatcheOrQueue(QUEUE, e, queue, 'queue');
+  }
 }
