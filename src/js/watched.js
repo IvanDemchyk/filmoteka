@@ -9,7 +9,6 @@
 //   queueBtn.classList.remove('active');
 // }
 
-
 import { watche, queue } from './local.js';
 import { card } from './local';
 import { checkDataRenderPage } from './libaryLocal';
