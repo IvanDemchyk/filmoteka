@@ -31,8 +31,8 @@ class LocalePagination {
     this.pageSize = 20;
 
   }
-  paginate(arr, pN, pS) {
-    return arr.slice((pN - 1) * pS, pN * pS);
+  paginate(arr, pageNumber, pageSize) {
+    return arr.slice((pageNumber - 1) * pageSize, pageNumber * pageSize);
   }
 
   paginationRender() {
