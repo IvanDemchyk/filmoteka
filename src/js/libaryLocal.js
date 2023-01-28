@@ -4,7 +4,7 @@ import { card } from './local';
 
 // const dataWatcheMovie = JSON.parse(localStorage.getItem(WATCHE));
 
-function checkDataRenderPage(data) {
+export function checkDataRenderPage(data) {
   if (!data || !data.length) {
     return `<li class="notification">
             <p class="notification-desc">
