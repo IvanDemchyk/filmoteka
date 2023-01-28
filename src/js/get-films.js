@@ -1,14 +1,37 @@
 // console.log('get-films');
-import { createMovieCard } from './createMovieCard.js';
-import { getfetchTrends } from './api-films.js';
-import { CURRENT_MOVIES, WATCHE, QUEUE, watche, queue } from './local.js';
-import { card } from './local';
-import { globalRequest } from './searchRequest';
+import {
+  createMovieCard
+} from './createMovieCard.js';
+import {
+  getfetchTrends
+} from './api-films.js';
+import {
+  CURRENT_MOVIES,
+  WATCHE,
+  QUEUE,
+  watche,
+  queue
+} from './local.js';
+import {
+  card
+} from './local';
+import {
+  globalRequest
+} from './searchRequest';
+import {
+  pagination,
+  paginationBoxElem
+} from './pagination.js';
 console.log(globalRequest);
 let page = 1;
 let btnActionWatch = 'add to watched';
+
+paginationBoxElem;
 async function render(page) {
-  const data = await getfetchTrends(page);
+  const data = await getfetchTrends(page).then(data => {
+    pagination(data.page, data.total_pages); /// Рендер розмітки пагінації на сторінці
+    return data;
+  });
   localStorage.setItem(CURRENT_MOVIES, JSON.stringify(data));
   card.innerHTML = createMovieCard(
     JSON.parse(localStorage.getItem(CURRENT_MOVIES)).results
@@ -109,7 +132,7 @@ function removeLocalStorageWatcheOrQueue(key, event, local, btn) {
   const film = JSON.parse(localStorage.getItem(key));
   const titleFilm =
     event.currentTarget.parentElement.parentElement.firstElementChild
-      .textContent;
+    .textContent;
   film.forEach((el, i) => {
     el.title === titleFilm ? local.splice(i, 1) : el;
   });
