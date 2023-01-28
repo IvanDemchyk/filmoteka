@@ -1,2 +1,0 @@
-!function(){var e=document.querySelector(".watched-btn-js"),t=document.querySelector(".queue-btn-js");e.addEventListener("click",(function(){e.classList.add("active"),t.classList.remove("active")}));var c=document.querySelector(".watched-btn-js"),n=document.querySelector(".queue-btn-js");n.addEventListener("click",(function(){n.classList.add("active"),c.classList.remove("active")}))}();
-//# sourceMappingURL=library.14eaed7b.js.map
