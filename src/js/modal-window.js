@@ -1,17 +1,22 @@
-import { CURRENT_MOVIES } from './local.js';
+import { CURRENT_MOVIES, watche, queue, WATCHE, QUEUE } from './local.js';
 
 const backdrop = document.querySelector('.backdrop');
 const modalWindow = document.querySelector('.modal-window');
 
 // відкриття модального вікна з інфо про фільм
 function showMovie(e) {
-  const movieId = Number(e.target.closest('.card__item').id);
-  const film = JSON.parse(localStorage.getItem(CURRENT_MOVIES)).results.find(
-    movie => movie.id === movieId
-  );
+  const film = getFilm(e, '.card__item');
+
   createMovieInfo(film);
   eventListeners(closeModal, addFilm);
   backdrop.hidden = false;
+}
+
+function getFilm(e, element) {
+  const movieId = Number(e.target.closest(element).id);
+  return JSON.parse(localStorage.getItem(CURRENT_MOVIES)).results.find(
+    movie => movie.id === movieId
+  );
 }
 
 // розмітка з інфо про фільм у модальному вікні
@@ -68,9 +73,6 @@ function createMovieInfo(movie) {
 // функції для закриття модального вікна
 const closeModal = {
   onBackdropClick(e) {
-    if (e.target.closest('.modal__movie')) {
-      console.log(true);
-    }
     if (e.target.parentElement.nodeName === 'BODY') {
       backdrop.hidden = true;
       backdrop.removeEventListener('click', this.onBackdropClick);
@@ -93,16 +95,39 @@ const closeModal = {
 // функції додавання фільмів у список переглянутих та у чергу
 const addFilm = {
   toWatched(e) {
-    e.currentTarget.textContent === 'add to watched'
-      ? (e.currentTarget.textContent = 'remove from watched')
-      : (e.currentTarget.textContent = 'add to watched');
+    if (e.currentTarget.textContent === 'add to watched') {
+      addToWatchedOrQueue(e, watche, WATCHE, 'watched');
+    } else {
+      e.currentTarget.textContent = 'remove from watched';
+      removeFromWatchedOrQueue(e, watche, WATCHE, 'watched');
+    }
   },
+
   toQueue(e) {
-    e.currentTarget.textContent === 'add to queue'
-      ? (e.currentTarget.textContent = 'remove from queue')
-      : (e.currentTarget.textContent = 'add to queue');
+    if (e.currentTarget.textContent === 'add to queue') {
+      addToWatchedOrQueue(e, queue, QUEUE, 'queue');
+    } else {
+      removeFromWatchedOrQueue(e, queue, QUEUE, 'queue');
+    }
   },
 };
+
+function addToWatchedOrQueue(e, local, key, btn) {
+  const film = getFilm(e, '.modal__movie');
+  local.push(film);
+  localStorage.setItem(key, JSON.stringify(local));
+  e.currentTarget.textContent = `remove from ${btn}`;
+}
+
+function removeFromWatchedOrQueue(e, local, key, btn) {
+  const films = JSON.parse(localStorage.getItem(key));
+  const movieId = Number(e.target.closest('.modal__movie').id);
+  films.forEach((film, i) => {
+    film.id === movieId ? local.splice(i, 1) : el;
+  });
+  localStorage.setItem(key, JSON.stringify(local));
+  e.currentTarget.textContent = `add to ${btn}`;
+}
 
 // додає та видаляє слухачі подій
 function eventListeners(closeModal, addFilm) {
@@ -118,4 +143,5 @@ function eventListeners(closeModal, addFilm) {
   backdrop.addEventListener('click', closeModal.onBackdropClick);
   document.addEventListener('keydown', closeModal.onEsc);
 }
+
 export { showMovie };
