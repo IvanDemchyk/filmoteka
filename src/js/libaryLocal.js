@@ -1,8 +1,8 @@
-import { CURRENT_MOVIES, WATCHE, QUEUE, watche, queue } from './local.js';
+import { watche, queue } from './local.js';
 import { createMovieCard } from './createMovieCard';
-const cardLibary = document.querySelector('.card');
+import { card } from './local';
 
-const dataWatcheMovie = JSON.parse(localStorage.getItem(WATCHE));
+// const dataWatcheMovie = JSON.parse(localStorage.getItem(WATCHE));
 
 function checkDataRenderPage(data) {
   if (!data || !data.length) {
@@ -18,7 +18,4 @@ function checkDataRenderPage(data) {
   return createMovieCard(data);
 }
 
-cardLibary.insertAdjacentHTML(
-  'beforeend',
-  checkDataRenderPage(dataWatcheMovie)
-);
+card.insertAdjacentHTML('beforeend', checkDataRenderPage(watche));
