@@ -1,7 +1,5 @@
 import { fetchMovies } from './fetchMovie';
-import { card } from './local';
-import { createMovieCard } from './createMovieCard';
-import { CURRENT_MOVIES, WATCHE, QUEUE, watche, queue } from './local';
+import { render } from './render';
 const form = document.querySelector('.form-js');
 const inputEl = document.querySelector('.form-input');
 const notif = document.querySelector('.form__notification');
@@ -27,12 +25,7 @@ async function inputRequest(e) {
       }, 10000);
       return;
     }
-    localStorage.setItem(CURRENT_MOVIES, JSON.stringify(data));
-    globalRequest = request;
-    // console.log(globalRequest);
-    card.innerHTML = createMovieCard(
-      JSON.parse(localStorage.getItem(CURRENT_MOVIES)).results
-    );
+    render(data);
   } catch (err) {
     console.log('Error');
     errorMsg;

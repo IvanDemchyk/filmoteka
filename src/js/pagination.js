@@ -1,55 +1,64 @@
 const API_KEY = '0b11624b950ea9c4284f61844023b09c';
 const BASE_URL = 'https://api.themoviedb.org/3/trending';
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
+import { render } from './render.js';
+import { fetchMovies } from './fetchMovie';
+import { getfetchTrends } from './api-films.js';
+// import { createMovieCard } from './createMovieCard.js';
+// import { card } from './local';
+// import { getfetchTrends } from './api-films.js';
+// import { CURRENT_MOVIES, WATCHE, QUEUE, watche, queue } from './local.js';
 
-const movieListElem = document.querySelector('.js-film__list');
+// const movieListElem = document.querySelector('.js-film__list');
 const paginationBoxElem = document.querySelector('.js-pagination');
 
 let currPageGlobe;
 
-function getTrendingMovies(page = 1) {
-  return trendingMovies = fetch(`${BASE_URL}/movie/week?api_key=${API_KEY}&page=${page}`)
-    .then(resp => {
+async function getTrendingMovies(page = 1) {
+  console.log('try pag');
+  const resp = await getfetchTrends(page);
+  console.log(resp);
+  return resp;
+  // return (trendingMovies = fetch(
+  //   `${BASE_URL}/movie/week?api_key=${API_KEY}&page=${page}`
+  // // )
+  // .then(resp => {
+  //   if (!resp.ok) {
+  //     throw new Error(resp.statusText);
+  //   }
 
-      if (!resp.ok) {
-        throw new Error(resp.statusText);
-      }
-
-      return resp.json();
-    }).catch(err => console.log(err));
-
+  //   return resp;
+  // })
+  // .catch(err => console.log(err));
 }
+let page = 1;
+
 getTrendingMovies().then(data => {
-  createMarkup(data.results);
+  render(data);
   pagination(data.page, data.total_pages);
 });
 
-function createMarkup(arr) {
-  const markup = arr.map(({
-    poster_path,
-    title,
-    release_date,
-    vote_average,
-    genre_ids
-  }) => {
-    return `<li class="film__item">
-          <img class="film__item-img" src="${IMG_URL}${poster_path}">
-          <h2 class="film__item-headline">${title}</h2>
-          <div class="film__list-inner">
-            <p class="film__item-genre">${genre_ids}</p>
-            <p class="film__item-year">${release_date}</p>
-            <p class="film__item-rate">${vote_average}</p>
-          </div>
-        </li>`
-  }).join('');
+// function createMarkup(arr) {
+//   const markup = arr
+//     .map(({ poster_path, title, release_date, vote_average, genre_ids }) => {
+//       return `<li class="film__item">
+//           <img class="film__item-img" src="${IMG_URL}${poster_path}">
+//           <h2 class="film__item-headline">${title}</h2>
+//           <div class="film__list-inner">
+//             <p class="film__item-genre">${genre_ids}</p>
+//             <p class="film__item-year">${release_date}</p>
+//             <p class="film__item-rate">${vote_average}</p>
+//           </div>
+//         </li>`;
+//     })
+//     .join('');
 
-  movieListElem.innerHTML = markup;
-}
+//   movieListElem.innerHTML = markup;
+// }
 
-paginationBoxElem.addEventListener("click", paginationHandler);
+paginationBoxElem.addEventListener('click', paginationHandler);
 
 function pagination(currPage, allPages) {
-
   let markupControls = '';
   let beforeTwoPages = currPage - 2;
   let beforeOnePage = currPage - 1;
@@ -97,35 +106,36 @@ function pagination(currPage, allPages) {
 }
 
 function paginationHandler(evt) {
-
   console.log(evt.target);
   if (evt.target.nodeName !== 'LI') {
     return;
   }
 
-  if (evt.target.textContent === "...") {
+  if (evt.target.textContent === '...') {
     return;
   }
 
-  if (evt.target.textContent === "🡸") {
-    getTrendingMovies(currPageGlobe -= 1).then(data => {
-      createMarkup(data.results);
-      pagination(data.page, date.total_pages);
-    })
+  if (evt.target.textContent === '🡸') {
+    getTrendingMovies((currPageGlobe -= 1)).then(data => {
+      render(data);
+      pagination(data.page, data.total_pages);
+    });
+    // const data = getTrendingMovies((currPageGlobe -= 1));
+    // render(data);
+    // pagination(data.page, date.total_pages);
   }
 
-  if (evt.target.textContent === "🡺") {
-    getTrendingMovies(currPageGlobe += 1).then(data => {
-      createMarkup(data.results);
+  if (evt.target.textContent === '🡺') {
+    getTrendingMovies((currPageGlobe += 1)).then(data => {
+      render(data);
       pagination(data.page, data.total_pages);
-    })
+    });
   }
 
   const actualPage = evt.target.textContent;
 
   getTrendingMovies(actualPage).then(data => {
-    createMarkup(data.results);
+    render(data);
     pagination(data.page, data.total_pages);
-  })
-
+  });
 }
