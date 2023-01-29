@@ -45,7 +45,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
 }
 
 .page-nav__list {
@@ -126,21 +125,19 @@
   width: 130px;
   height: 44px;
   background-color: transparent;
-  border: 1px solid #FFFFFF;
+  border: 1px solid #ffffff;
   border-radius: 5px;
   font-weight: 500;
   font-size: 12px;
   line-height: 1.33;
   text-transform: uppercase;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .library-header__btn.active {
-  background-color: #FF6B01;
+  background-color: #ff6b01;
   border: transparent;
 }
-
-
 
 @media screen and (min-width: 768px) {
   .page-header {
@@ -198,13 +195,11 @@
   .library-header__btn {
     width: 152px;
   }
-
 }
 
 @media screen and (min-width: 1280px) {
   .page-header {
     max-width: 1280px;
-
   }
 
   .home-header {
@@ -220,4 +215,9 @@
   .form-input {
     width: 394px;
   }
+}
+
+.library-header-notification {
+  background-color: #000000;
+  background-image: none;
 }
