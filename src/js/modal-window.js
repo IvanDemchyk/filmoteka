@@ -1,29 +1,29 @@
 import { CURRENT_MOVIES, watche, queue, WATCHE, QUEUE } from './local.js';
-
+import { GENRES_MOVIES } from './get-genres';
 const backdrop = document.querySelector('.backdrop');
 const modalWindow = document.querySelector('.modal-window');
 
 // відкриття модального вікна з інфо про фільм
 function showMovie(e) {
-  const film = getFilm(e, '.card__item');
+  const film = getFilm(e, '.card__item', CURRENT_MOVIES);
 
   const checkWatched = checkLibrary(watche, film);
   const checkQueue = checkLibrary(queue, film);
 
-  createMovieInfo(film, checkWatched, checkQueue);
+  createMovieInfo(film, GENRES_MOVIES, checkWatched, checkQueue);
   eventListeners(closeModal, addFilm);
   backdrop.hidden = false;
 }
 
-function getFilm(e, element) {
+function getFilm(e, element, fromStoarage) {
   const movieId = Number(e.target.closest(element).id);
-  return JSON.parse(localStorage.getItem(CURRENT_MOVIES)).results.find(
+  return JSON.parse(localStorage.getItem(fromStoarage)).results.find(
     movie => movie.id === movieId
   );
 }
 
 // розмітка з інфо про фільм у модальному вікні
-function createMovieInfo(movie, checkWatched, checkQueue) {
+function createMovieInfo(movie, genresList, checkWatched, checkQueue) {
   const modalMovieMarkup = `<button class="modal-window__close-btn">close</button>
 
     <div class="modal__movie" id='${
@@ -57,7 +57,10 @@ function createMovieInfo(movie, checkWatched, checkQueue) {
       </tr>
       <tr>
       <td class="movie__detail modal-text--left-column modal-text">Genres</td>
-      <td class="movie__detail modal-text">${movie.genre_ids}</td>
+      <td class="movie__detail modal-text">${genresConvertor(
+        movie.genre_ids,
+        genresList
+      )}</td>
       </tr>
           </tbody>
           </table>
@@ -71,7 +74,7 @@ function createMovieInfo(movie, checkWatched, checkQueue) {
         <button class="movie__add-btn modal-text modal-text--uppercase js-movie__add-btn--queue">${
           checkQueue ? 'remove from ' : 'add to '
         }queue</button>
-      </div>
+      </div><button data-movie-id='${movie.id}'>Trailer</button>
       </div></div>
   `;
   modalWindow.innerHTML = modalMovieMarkup;
@@ -103,31 +106,45 @@ const closeModal = {
 const addFilm = {
   toWatched(e) {
     if (e.currentTarget.textContent === 'add to watched') {
-      addToWatchedOrQueue(e, watche, WATCHE, 'watched');
+      addToWatchedOrQueue(
+        e,
+        '.modal__movie',
+        CURRENT_MOVIES,
+        watche,
+        WATCHE,
+        'watched'
+      );
     } else {
-      removeFromWatchedOrQueue(e, watche, WATCHE, 'watched');
+      removeFromWatchedOrQueue(e, '.modal__movie', watche, WATCHE, 'watched');
     }
   },
 
   toQueue(e) {
     if (e.currentTarget.textContent === 'add to queue') {
-      addToWatchedOrQueue(e, queue, QUEUE, 'queue');
+      addToWatchedOrQueue(
+        e,
+        '.modal__movie',
+        CURRENT_MOVIES,
+        queue,
+        QUEUE,
+        'queue'
+      );
     } else {
-      removeFromWatchedOrQueue(e, queue, QUEUE, 'queue');
+      removeFromWatchedOrQueue(e, '.modal__movie', queue, QUEUE, 'queue');
     }
   },
 };
 
-function addToWatchedOrQueue(e, local, key, btn) {
-  const film = getFilm(e, '.modal__movie');
+function addToWatchedOrQueue(e, element, fromStoarage, local, key, btn) {
+  const film = getFilm(e, element, fromStoarage);
   local.push(film);
   localStorage.setItem(key, JSON.stringify(local));
   e.currentTarget.textContent = `remove from ${btn}`;
 }
 
-function removeFromWatchedOrQueue(e, local, key, btn) {
+function removeFromWatchedOrQueue(e, element, local, key, btn) {
   const films = JSON.parse(localStorage.getItem(key));
-  const movieId = Number(e.target.closest('.modal__movie').id);
+  const movieId = Number(e.target.closest(element).id);
   films.forEach((film, i) => {
     film.id === movieId ? local.splice(i, 1) : film;
   });
@@ -152,10 +169,19 @@ function eventListeners(closeModal, addFilm) {
 
 export { showMovie };
 
+function genresConvertor(movieGenres, genresList) {
+  return movieGenres
+    .map(genre => {
+      const allGenres = JSON.parse(localStorage.getItem(genresList));
+      return allGenres[genre];
+    })
+    .join(', ');
+}
+
 function checkLibrary(local, film) {
   if (local.length === 0) {
     return;
   }
 
-  return local.reduce((acc, movie) => (acc = movie.id === film.id), 0);
+  return local.find(movie => movie.id === film.id);
 }
