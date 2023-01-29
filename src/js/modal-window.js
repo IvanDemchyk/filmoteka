@@ -7,7 +7,10 @@ const modalWindow = document.querySelector('.modal-window');
 function showMovie(e) {
   const film = getFilm(e, '.card__item');
 
-  createMovieInfo(film);
+  const checkWatched = checkLibrary(watche, film);
+  const checkQueue = checkLibrary(queue, film);
+
+  createMovieInfo(film, checkWatched, checkQueue);
   eventListeners(closeModal, addFilm);
   backdrop.hidden = false;
 }
@@ -20,7 +23,7 @@ function getFilm(e, element) {
 }
 
 // розмітка з інфо про фільм у модальному вікні
-function createMovieInfo(movie) {
+function createMovieInfo(movie, checkWatched, checkQueue) {
   const modalMovieMarkup = `<button class="modal-window__close-btn">close</button>
 
     <div class="modal__movie" id='${
@@ -62,8 +65,12 @@ function createMovieInfo(movie) {
           <h3 class="movie__about modal-text modal-text--uppercase">About</h3>
       <p class="movie__description modal-text">${movie.overview}</p>
       <div class="movie__add-buttons">
-        <button class="movie__add-btn modal-text modal-text--uppercase js-movie__add-btn--watched">add to watched</button>
-        <button class="movie__add-btn modal-text modal-text--uppercase js-movie__add-btn--queue">add to queue</button>
+        <button class="movie__add-btn modal-text modal-text--uppercase js-movie__add-btn--watched">${
+          checkWatched ? 'remove from ' : 'add to '
+        }watched</button>
+        <button class="movie__add-btn modal-text modal-text--uppercase js-movie__add-btn--queue">${
+          checkQueue ? 'remove from ' : 'add to '
+        }queue</button>
       </div>
       </div></div>
   `;
@@ -98,7 +105,6 @@ const addFilm = {
     if (e.currentTarget.textContent === 'add to watched') {
       addToWatchedOrQueue(e, watche, WATCHE, 'watched');
     } else {
-      e.currentTarget.textContent = 'remove from watched';
       removeFromWatchedOrQueue(e, watche, WATCHE, 'watched');
     }
   },
@@ -123,7 +129,7 @@ function removeFromWatchedOrQueue(e, local, key, btn) {
   const films = JSON.parse(localStorage.getItem(key));
   const movieId = Number(e.target.closest('.modal__movie').id);
   films.forEach((film, i) => {
-    film.id === movieId ? local.splice(i, 1) : el;
+    film.id === movieId ? local.splice(i, 1) : film;
   });
   localStorage.setItem(key, JSON.stringify(local));
   e.currentTarget.textContent = `add to ${btn}`;
@@ -145,3 +151,11 @@ function eventListeners(closeModal, addFilm) {
 }
 
 export { showMovie };
+
+function checkLibrary(local, film) {
+  if (local.length === 0) {
+    return;
+  }
+
+  return local.reduce((acc, movie) => (acc = movie.id === film.id), 0);
+}
