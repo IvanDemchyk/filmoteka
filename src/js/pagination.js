@@ -5,32 +5,34 @@ import { render } from './render.js';
 import { fetchMovies } from './fetchMovie';
 import { fetchTrends } from './fetchTrends.js';
 import { globalRequest } from './searchRequest';
-// import {currPageGlobe} from './paginFunction'
+// import { currPageGlobe } from './searchRequest';
 import { pagination } from './paginFunction.js';
 import { loaderOn } from './loader';
 import { loaderOff } from './loader';
 const paginationBoxElem = document.querySelector('.js-pagination');
-
+// let page = 1;
 let currPageGlobe;
 
-async function getTrendingMovies(page = 1) {
+async function getMovies(page = 1) {
   console.log(globalRequest);
   let resp;
   if (globalRequest) {
     resp = await fetchMovies(page, globalRequest);
-
+    currPageGlobe = resp.page;
     return resp;
   } else {
     loaderOn();
     resp = await fetchTrends(page);
     window.onload = loaderOff();
+    currPageGlobe = resp.page;
     return resp;
   }
 }
 
-getTrendingMovies().then(data => {
+getMovies().then(data => {
   loaderOn();
   render(data);
+  currPageGlobe = data.page;
   window.onload = loaderOff();
   pagination(data.page, data.total_pages);
 });
@@ -47,18 +49,18 @@ function paginationHandler(evt) {
   }
 
   if (evt.target.textContent === '🡸') {
-    getTrendingMovies((currPageGlobe -= 1)).then(data => {
+    getMovies((currPageGlobe -= 1)).then(data => {
       render(data);
       pagination(data.page, data.total_pages);
     });
   } else if (evt.target.textContent === '🡺') {
-    getTrendingMovies((currPageGlobe += 1)).then(data => {
+    getMovies((currPageGlobe += 1)).then(data => {
       render(data);
       pagination(data.page, data.total_pages);
     });
   } else {
     const actualPage = evt.target.textContent;
-    getTrendingMovies(actualPage).then(data => {
+    getMovies(actualPage).then(data => {
       render(data);
       pagination(data.page, data.total_pages);
     });
