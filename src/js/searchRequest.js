@@ -10,7 +10,11 @@ export let globalRequest;
 let page = 1;
 async function inputRequest(e) {
   e.preventDefault();
+<<<<<<< Updated upstream
   request = inputEl.value.trim();
+=======
+   let request = inputEl.value.trim();
+>>>>>>> Stashed changes
   if (!request) {
     return;
   }
