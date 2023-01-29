@@ -7,16 +7,17 @@ const form = document.querySelector('.form-js');
 const inputEl = document.querySelector('.form-input');
 const notif = document.querySelector('.form__notification');
 export let globalRequest;
+export let currPageGlobe;
 let page = 1;
 async function inputRequest(e) {
   e.preventDefault();
-  request = inputEl.value.trim();
+   let request = inputEl.value.trim();
   if (!request) {
     return;
   }
   try {
     const data = await fetchMovies(page, request);
-    console.log('hello try');
+    // console.log('hello try');
     if (data.results.length === 0) {
       notif.style.visibility = 'visible';
       setTimeout(() => {
@@ -24,6 +25,7 @@ async function inputRequest(e) {
       }, 5000);
       return;
     }
+    currPageGlobe = data.page;
     loaderOn();
     render(data);
     window.onload = loaderOff();

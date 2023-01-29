@@ -1,3 +1,4 @@
+import { genresConvertor } from "./genresConvertor";
 export function createMovieCard(data) {
   const markup = data
     .map(
@@ -11,9 +12,9 @@ export function createMovieCard(data) {
         id,
       }) => {
         return `<li class="card__item list" id="${id}">
-            <img src="https://image.tmdb.org/t/p/w500/${poster_path}" alt="${overview}" class="card__img" />
+            <img src="https://image.tmdb.org/t/p/w500/${poster_path}" loading="lazy" alt="${overview}" class="card__img" />
             <h2 class="card__title">${title ?? original_title}</h2>
-            <p class="card__desc">${genre_ids.join(
+            <p class="card__desc">${genresConvertor(genre_ids).join(
               ', '
             )} | ${release_date.substr(0, 4)}
             </p>
