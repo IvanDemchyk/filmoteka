@@ -11,6 +11,7 @@ export function checkDataRenderPage(data) {
             Nothing here yet, go back and select a movie.
             </p>`;
   }
+  divContainer.classList.remove('notification-bcg');
   return createMovieCard(data);
 }
 
