@@ -8,8 +8,10 @@ import { pagination } from './paginFunction.js';
 import { loaderOn } from './loader';
 import { loaderOff } from './loader';
 const paginationBoxElem = document.querySelector('.js-pagination');
+const form = document.querySelector('.form-js');
 // let page = 1;
 let currPageGlobe;
+let globalRequest;
 const errorMsg = err => Notify.failure(`${err}`);
 form.addEventListener('submit', inputRequest);
 
