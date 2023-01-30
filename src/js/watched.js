@@ -35,7 +35,7 @@ function onClickBtn({ target }) {
   if (target.classList.contains('watched-btn-js')) {
     card.innerHTML = '';
     watchedLocal.paginationRender();
-    toggleClassBtn('active', btnQueue, target);
+    toggleClassBtn('active', btnWatch, target);
   }
 }
 
