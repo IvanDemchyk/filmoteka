@@ -1,7 +1,8 @@
 import { watche, queue } from './local.js';
 import { createMovieCard } from './createMovieCard';
 import { card } from './local';
-import {watchedLocal} from "./watched";
+import { watchedLocal } from './watched';
+import { showMovieLibrary } from './modal-window.js';
 
 const divContainer = document.querySelector('#main');
 const header = document.querySelector('.library-header');

@@ -1,11 +1,13 @@
 import { CURRENT_MOVIES, watche, queue, WATCHE, QUEUE } from './local.js';
 import { GENRES_MOVIES } from './get-genres';
+
 const backdrop = document.querySelector('.backdrop');
 const modalWindow = document.querySelector('.modal-window');
-
+const watchedBtn = document.querySelector('.watched-btn-js');
+const queueBtn = document.querySelector('.queue-btn-js');
 // відкриття модального вікна з інфо про фільм
-function showMovie(e) {
-  const film = getFilm(e, '.card__item', CURRENT_MOVIES);
+function showMovieMain(e) {
+  const film = getFilmMain(e, '.card__item', CURRENT_MOVIES);
 
   const checkWatched = checkLibrary(watche, film);
   const checkQueue = checkLibrary(queue, film);
@@ -15,9 +17,29 @@ function showMovie(e) {
   backdrop.hidden = false;
 }
 
-function getFilm(e, element, fromStoarage) {
+function showMovieLibrary(e) {
+  const library = watchedOrQueue();
+  const film = getFilmLibrary(e, '.card__item', library);
+
+  const checkWatched = checkLibrary(watche, film);
+  const checkQueue = checkLibrary(queue, film);
+
+  createMovieInfo(film, GENRES_MOVIES, checkWatched, checkQueue);
+  eventListeners(closeModal, addFilm);
+
+  backdrop.hidden = false;
+}
+
+function getFilmMain(e, element, fromStoarage) {
   const movieId = Number(e.target.closest(element).id);
   return JSON.parse(localStorage.getItem(fromStoarage)).results.find(
+    movie => movie.id === movieId
+  );
+}
+
+function getFilmLibrary(e, element, fromStoarage) {
+  const movieId = Number(e.target.closest(element).id);
+  return JSON.parse(localStorage.getItem(fromStoarage)).find(
     movie => movie.id === movieId
   );
 }
@@ -136,7 +158,7 @@ const addFilm = {
 };
 
 function addToWatchedOrQueue(e, element, fromStoarage, local, key, btn) {
-  const film = getFilm(e, element, fromStoarage);
+  const film = getFilmMain(e, element, fromStoarage);
   local.push(film);
   localStorage.setItem(key, JSON.stringify(local));
   e.currentTarget.textContent = `remove from ${btn}`;
@@ -167,8 +189,6 @@ function eventListeners(closeModal, addFilm) {
   document.addEventListener('keydown', closeModal.onEsc);
 }
 
-export { showMovie };
-
 function genresConvertor(movieGenres, genresList) {
   return movieGenres
     .map(genre => {
@@ -185,3 +205,12 @@ function checkLibrary(local, film) {
 
   return local.find(movie => movie.id === film.id);
 }
+
+function watchedOrQueue() {
+  if (watchedBtn.classList.contains('active')) {
+    return WATCHE;
+  } else {
+    return QUEUE;
+  }
+}
+export { showMovieMain, showMovieLibrary };
