@@ -1,6 +1,3 @@
-// const API_KEY = '0b11624b950ea9c4284f61844023b09c';
-// const BASE_URL = 'https://api.themoviedb.org/3/trending';
-// const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 import { render } from './render.js';
 import { fetchMovies } from './fetchMovie';
 import { fetchTrends } from './fetchTrends.js';

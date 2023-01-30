@@ -8,6 +8,8 @@ export function genresConvertor(genre_ids) {
   if (result.length > 2) {
     result.splice(2, result.length - 2);
     result.push("Other")
+  } else if (result.length === 0) {
+    result.push("no genres")
   }
   return result
 }
