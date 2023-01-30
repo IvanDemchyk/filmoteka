@@ -1,4 +1,4 @@
-import getFetchMovies from './api-films.js';
+import { fetchMovies } from './fetchMovie';
 import { CURRENT_MOVIES, WATCHE, QUEUE, watche, queue } from './local.js';
 
 const refs = {
@@ -12,7 +12,7 @@ refs.btnPrev.addEventListener('click', onClickPrev);
 refs.btnNext.addEventListener('click', onClickNext);
 
 const page = 1;
-const request = `/day`;
+// const request = `/day`;
 
 let sliderWidth = refs.sliderList.clientWidth;
 console.log(sliderWidth);
@@ -62,7 +62,7 @@ function createSliderItems(data) {
   return markup;
 }
 
-getFetchMovies(page, request).then(res => {
+fetchMovies(page).then(res => {
   const qvtMovies = res.results.length - 1;
 
   const popularMovies = [];

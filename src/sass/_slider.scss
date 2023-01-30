@@ -1,7 +1,6 @@
 .slider {
   overflow: hidden;
   position: relative;
-  //   outline: 1px solid red;
   width: 900px;
   display: none;
   min-height: 240px;
@@ -40,7 +39,6 @@
   align-items: center;
   justify-content: center;
   position: absolute;
-  //   outline: 1px solid red;
   background-color: rgba(10, 0, 0, 0.6);
   &--prev {
     border-bottom-left-radius: 5px;
@@ -80,10 +78,9 @@
 
 .slider__icon {
   position: absolute;
-  //   outline: 1px solid red;
   border-radius: 40px;
   border: 2px solid #fff;
-  background-color: rgba(10, 0, 0, 0.6);
+  background-color: rgb(0, 0, 0);
   width: 80px;
   height: 80px;
   transition: all 0.3s ease-in-out;
@@ -92,7 +89,7 @@
   }
   &--next {
     right: -40px;
-  } 
+  }
 }
 
 @media screen and (max-width: 1279px) {
