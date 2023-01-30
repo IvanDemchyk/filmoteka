@@ -8,8 +8,8 @@ export function createMovieCard(data) {
         title = '',
         genre_ids = ['no info'],
         overview = '',
-        release_date = '......',
-        id = Date.now,
+        release_date = '....',
+        id = Date.now(),
       }) => {
         let path;
         if (poster_path) {
