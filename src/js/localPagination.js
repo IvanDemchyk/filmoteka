@@ -40,7 +40,7 @@ export class LocalPagination {
     }
   
     peakedPage(actPage) {
-      this.pageNum = actPage;
+      this.pageNum = Number(actPage);
       this.pagedArr = this.paginate(this.arr, this.pageNum, this.pageSize);
       card.innerHTML = checkDataRenderPage(this.pagedArr);
       paginationLib(this.pageNum, this.pageAll);
@@ -53,26 +53,35 @@ function paginationLib(currPage, allPages) {
     let beforeOnePage = currPage - 1;
     let afterOnePage = currPage + 1;
     let afterTwoPage = currPage + 2;
+
       
     if (currPage > 1) {
       markupControls += `<li class='arrows arrow-left'>&#129144;</li>`;
       markupControls += `<li class="firstInt">1</li>`;
+      console.log()
     }
     if (currPage > 4) {
       markupControls += `<li class="dots">...</li>`;
     }
     if (currPage > 3) {
       markupControls += `<li class="two-left">${beforeTwoPages}</li>`;
+      console.log("beforeTwoPages", beforeTwoPages)
     }
     if (currPage > 2) {
       markupControls += `<li>${beforeOnePage}</li>`;
+      console.log("beforeOnePage", beforeOnePage)
     }
+
     markupControls += `<li class='active'>${currPage}</li>`;
+    console.log("currPage", currPage);
+
     if (allPages - 1 > currPage) {
       markupControls += `<li >${afterOnePage}</li>`;
+      console.log("afterOnePage", afterOnePage);
     }
     if (allPages - 2 > currPage) {
       markupControls += `<li >${afterTwoPage}</li>`;
+      console.log("afterTwoPage", afterTwoPage);
     }
     if (allPages - 3 > currPage) {
       markupControls += `<li class="dots">...</li>`;
