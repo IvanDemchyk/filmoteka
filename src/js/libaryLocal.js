@@ -18,4 +18,4 @@ export function checkDataRenderPage(data) {
   return createMovieCard(data);
 }
 
-card.insertAdjacentHTML('beforeend', checkDataRenderPage(watche));
+/* card.insertAdjacentHTML('beforeend', checkDataRenderPage(watche)); */
