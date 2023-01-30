@@ -1,6 +1,7 @@
 import { watche, queue } from './local.js';
 import { createMovieCard } from './createMovieCard';
 import { card } from './local';
+import {watchedLocal} from "./watched";
 
 const divContainer = document.querySelector('#main');
 const header = document.querySelector('.library-header');
@@ -17,5 +18,7 @@ export function checkDataRenderPage(data) {
   divContainer.classList.remove('notification-bcg');
   return createMovieCard(data);
 }
+
+watchedLocal.paginationRender();
 
 /* card.insertAdjacentHTML('beforeend', checkDataRenderPage(watche)); */

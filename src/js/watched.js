@@ -17,7 +17,7 @@ const btnQueue = document.querySelector('.queue-btn-js');
 const containerBtn = document.querySelector('.library-header__buttons');
 
 const CRM = JSON.parse(localStorage.getItem(CURRENT_MOVIES)).results; // test arr
-const watchedLocal = new LocalPagination(CRM); // test until array  watched will be fulfiled 
+export const watchedLocal = new LocalPagination(CRM); // test until array  watched will be fulfiled 
 const queueLocal = new LocalPagination(CRM); //test until array  queue will be fulfiled 
 
 containerBtn.addEventListener('click', onClickBtn);
