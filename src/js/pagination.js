@@ -81,17 +81,23 @@ function paginationHandler(evt) {
   }
 
   if (evt.target.textContent === '🡸') {
+    // currPageGlobe = JSON.parse(localStorage.getItem('current_movies')).page;
+    console.log('Arrov<-', currPageGlobe);
     getMovies((currPageGlobe -= 1)).then(data => {
       render(data);
       pagination(data.page, data.total_pages);
     });
   } else if (evt.target.textContent === '🡺') {
+    // currPageGlobe = JSON.parse(localStorage.getItem("current_movies")).page;
+    console.log('Arrov>-', currPageGlobe);
     getMovies((currPageGlobe += 1)).then(data => {
       render(data);
       pagination(data.page, data.total_pages);
     });
   } else {
     const actualPage = evt.target.textContent;
+    // currPageGlobe = actualPage;
+    console.log('in current - ', currPageGlobe);
     getMovies(actualPage).then(data => {
       render(data);
       pagination(data.page, data.total_pages);

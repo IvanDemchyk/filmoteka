@@ -7,7 +7,7 @@ export function genresConvertor(genre_ids) {
   });
   if (result.length > 2) {
     result.splice(2, result.length - 2);
-    result.push("other")
+    result.push("Other")
   }
   return result
 }
