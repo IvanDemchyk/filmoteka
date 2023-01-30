@@ -1,17 +1,223 @@
 .page-header {
+  max-width: 320px;
+  height: 230px;
+  margin-left: auto;
+  margin-right: auto;
 
-    background-image: url(../images/header-1-desktop.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+  background-color: #000000;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.home-header {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+    url(../images/header-1-mobile.jpg);
+}
+
+.library-header {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+    url(../images/header-2-mobile.jpg);
+}
+
+.home-header__container {
+  padding-top: 28px;
+  padding-bottom: 34px;
+}
+
+.library-header__container {
+  padding-top: 28px;
+  padding-bottom: 62px;
 }
 
 .page-header__logo-icon {
-    width: 24px;
-    height: 24px;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
 }
 
-.form__search {
-    width: 14px;
-    height: 14px;
+.page-header__logo-title {
+  display: none;
+}
+
+.page-header__navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-nav__list {
+  list-style: none;
+  display: flex;
+}
+
+.page-nav__item_home {
+  margin-right: 40px;
+}
+
+.page-nav__link {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  color: #ffffff;
+}
+
+.current {
+  border-bottom: 3px solid #ff001b;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 44px;
+}
+
+.form-input {
+  border: none;
+  background-color: transparent;
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 1.33;
+  font-weight: 400;
+  width: 280px;
+  border-bottom: 0.5px solid #ffffff;
+
+  &::placeholder {
+    color: #ffffff;
+    font-size: 14px;
+    line-height: 1.14;
+    font-weight: 400;
+  }
+}
+
+.form__btn {
+  background-color: transparent;
+  border: none;
+  margin-left: -30px;
+  cursor: pointer;
+  padding: 7px;
+}
+
+.form__notification {
+  visibility: hidden;
+  margin-top: 16px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  color: #ff001b;
+}
+
+.library-header__buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 44px;
+}
+
+.library-header__btn {
+  cursor: pointer;
+  width: 130px;
+  height: 44px;
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.library-header__btn.active {
+  background-color: #ff6b01;
+  border: transparent;
+}
+
+@media screen and (min-width: 768px) {
+  .page-header {
+    max-width: 768px;
+    height: 216px;
+  }
+
+  .home-header {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(../images/header-1-tablet.jpg);
+  }
+
+  .library-header {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(../images/header-2-tablet.jpg);
+  }
+
+  .library-header__container {
+    padding-top: 24px;
+    padding-bottom: 60px;
+  }
+
+  .page-header__logo-icon {
+    margin-right: 8px;
+  }
+
+  .page-header__logo-title {
+    display: inline-block;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 35px;
+    color: #ffffff;
+  }
+
+  .form-input {
+    width: 336px;
+  }
+
+  .page-header__navigation {
+    margin-bottom: 30px;
+  }
+
+  .form__notification {
+    margin-top: 20px;
+  }
+
+  .library-header__buttons {
+    justify-content: center;
+  }
+
+  .library-header__btn-watched {
+    margin-right: 32px;
+  }
+
+  .library-header__btn {
+    width: 152px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .page-header {
+    max-width: 1280px;
+  }
+
+  .home-header {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(../images/header-1-desktop.jpg);
+  }
+
+  .library-header {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(../images/header-2-desktop.jpg);
+  }
+
+  .form-input {
+    width: 394px;
+  }
+}
+
+.library-header-notification {
+  background-color: #000000;
+  background-image: none;
 }

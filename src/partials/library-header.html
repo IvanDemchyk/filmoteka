@@ -1,23 +1,31 @@
-<header class="library-header page-header ">
-    <div class="container">
-        <svg class="page-header__logo-icon">
-            <use href="#">
-            </use>
-        </svg>
-        <a href="./index.html"
-           class="page-header__logo">Filmoteka</a>
-        <nav class="page-nav">
-            <ul class="page-nav__list">
-                <li class="page-nav__item">
-                    <a href="./index.html">Home</a>
-                </li>
-                <li class="page-nav__item">
-                    <a href="./library.html">my library</a>
-                </li>
-            </ul>
+<header class="library-header page-header container ">
+    <div class="library-header__container">
+        <div class="page-header__navigation">
+            <a href="./index.html"
+               class="page-header__logo">
+                <img class="page-header__logo-icon"
+                     src="./images/film.png"
+                     alt="film" />
+                <p class="page-header__logo-title">Filmoteka</p>
+            </a>
+            <nav class="page-nav">
+                <ul class="page-nav__list">
+                    <li class="page-nav__item page-nav__item_home">
+                        <a class="page-nav__link"
+                           href="./index.html">Home</a>
+                    </li>
+                    <li class="page-nav__item">
+                        <a class="page-nav__link current"
+                           href="./library.html">my library</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="library-header__buttons">
             <button type="button"
-                    class="library-header-btn watched-btn-js">Watched</button>
+                    class="library-header__btn library-header__btn-watched watched-btn-js active">Watched</button>
             <button type="button"
-                    class="library-header-btn queue-btn-js">queue</button>
+                    class="library-header__btn queue-btn-js">queue</button>
+        </div>
     </div>
 </header>
