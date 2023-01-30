@@ -24,13 +24,11 @@ function onClickBtn({ target }) {
     return;
   }
   if (target.classList.contains('queue-btn-js')) {
-    card.innerHTML = '';
-    card.insertAdjacentHTML('beforeend', checkDataRenderPage(queue));
+    renderPage(queue);
     toggleClassBtn('active', btnWatch, target);
   }
   if (target.classList.contains('watched-btn-js')) {
-    card.innerHTML = '';
-    card.insertAdjacentHTML('beforeend', checkDataRenderPage(watche));
+    renderPage(watche);
     toggleClassBtn('active', btnQueue, target);
   }
 }
@@ -38,4 +36,9 @@ function onClickBtn({ target }) {
 function toggleClassBtn(classStr, btn, current) {
   current.classList.add(classStr);
   btn.classList.remove(classStr);
+}
+
+function renderPage(local) {
+  card.innerHTML = '';
+  card.insertAdjacentHTML('beforeend', checkDataRenderPage(local));
 }
