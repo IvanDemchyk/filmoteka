@@ -9,7 +9,7 @@ import { globalRequest } from './searchRequest';
 import { pagination } from './paginFunction.js';
 import { loaderOn } from './loader';
 import { loaderOff } from './loader';
-const paginationBoxElem = document.querySelector('.js-pagination');
+export const paginationBoxElem = document.querySelector('.js-pagination');
 // let page = 1;
 let currPageGlobe;
 
@@ -36,6 +36,7 @@ getMovies().then(data => {
   window.onload = loaderOff();
   pagination(data.page, data.total_pages);
 });
+
 
 paginationBoxElem.addEventListener('click', paginationHandler);
 
