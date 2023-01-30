@@ -7,15 +7,14 @@ import { fetchTrends } from './fetchTrends.js';
 import { pagination } from './paginFunction.js';
 import { loaderOn } from './loader';
 import { loaderOff } from './loader';
-const paginationBoxElem = document.querySelector('.js-pagination');
+export const paginationBoxElem = document.querySelector('.js-pagination');
 const form = document.querySelector('.form-js');
-// let page = 1;
-let currPageGlobe;
+const inputEl = document.querySelector('.form-input');
+const notif = document.querySelector('.form__notification');
 let globalRequest;
-const errorMsg = err => Notify.failure(`${err}`);
-form.addEventListener('submit', inputRequest);
+let currPageGlobe = 1;
+let page = 1;
 
-// search function
 async function inputRequest(e) {
   e.preventDefault();
   let request = inputEl.value.trim();
@@ -23,7 +22,7 @@ async function inputRequest(e) {
     return;
   }
   try {
-    const data = await fetchMovies((page = 1), request);
+    const data = await fetchMovies(page, request);
     if (data.results.length === 0) {
       notif.style.visibility = 'visible';
       setTimeout(() => {
@@ -42,16 +41,16 @@ async function inputRequest(e) {
     errorMsg;
   }
 }
-
+const errorMsg = err => Notify.failure(`${err}`);
+form.addEventListener('submit', inputRequest);
 
 async function getMovies(page = 1) {
-  // console.log(globalRequest);
   let resp;
   if (globalRequest) {
     loaderOn();
-    resp = await fetchMovies(currPageGlobe, globalRequest);
-    window.onload = loaderOff();
+    resp = await fetchMovies(page, globalRequest);
     currPageGlobe = resp.page;
+    window.onload = loaderOff();
     return resp;
   } else {
     loaderOn();
@@ -69,7 +68,6 @@ getMovies().then(data => {
   window.onload = loaderOff();
   pagination(data.page, data.total_pages);
 });
-
 
 paginationBoxElem.addEventListener('click', paginationHandler);
 
