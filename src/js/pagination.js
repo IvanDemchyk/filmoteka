@@ -14,6 +14,8 @@ const notif = document.querySelector('.form__notification');
 
 let globalRequest;
 let currPageGlobe;
+const errorMsg = err => Notify.failure(`${err}`);
+form.addEventListener('submit', inputRequest);
 
 // search function
 async function inputRequest(e) {
@@ -23,8 +25,7 @@ async function inputRequest(e) {
     return;
   }
   try {
-    const data = await fetchMovies(page = 1, request);
-    // console.log('hello try');
+    const data = await fetchMovies((page = 1), request);
     if (data.results.length === 0) {
       notif.style.visibility = 'visible';
       setTimeout(() => {
@@ -43,8 +44,7 @@ async function inputRequest(e) {
     errorMsg;
   }
 }
-const errorMsg = err => Notify.failure(`${err}`);
-form.addEventListener('submit', inputRequest);
+
 
 async function getMovies(page = 1) {
   // console.log(globalRequest);
@@ -72,8 +72,6 @@ getMovies().then(data => {
   pagination(data.page, data.total_pages);
 });
 
-
-
 paginationBoxElem.addEventListener('click', paginationHandler);
 
 function paginationHandler(evt) {
@@ -88,19 +86,18 @@ function paginationHandler(evt) {
   if (evt.target.textContent === '🡸') {
     // currPageGlobe = JSON.parse(localStorage.getItem('current_movies')).page;
     console.log('Arrov<-', currPageGlobe);
-     getMovies((currPageGlobe -= 1)).then(data => {
+    getMovies((currPageGlobe -= 1)).then(data => {
       render(data);
       pagination(data.page, data.total_pages);
     });
-  }else if (evt.target.textContent === '🡺') {
+  } else if (evt.target.textContent === '🡺') {
     // currPageGlobe = JSON.parse(localStorage.getItem("current_movies")).page;
-    console.log('Arrov>-' ,currPageGlobe);
+    console.log('Arrov>-', currPageGlobe);
     getMovies((currPageGlobe += 1)).then(data => {
       render(data);
       pagination(data.page, data.total_pages);
     });
-  }
-  else {
+  } else {
     const actualPage = evt.target.textContent;
     // currPageGlobe = actualPage;
     console.log('in current - ', currPageGlobe);
