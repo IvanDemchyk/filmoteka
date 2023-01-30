@@ -1,7 +1,7 @@
-const form = document.querySelector('.form-js');
+// const form = document.querySelector('.form-js');
 
-form.addEventListener('submit', onSearch);
+// form.addEventListener('submit', onSearch);
 
-function onSearch(e) {
-  console.log(e);
-}
+// function onSearch(e) {
+//   console.log(e);
+// }
