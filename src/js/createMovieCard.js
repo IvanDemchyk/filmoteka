@@ -4,12 +4,12 @@ export function createMovieCard(data) {
     .map(
       ({
         poster_path,
-        original_title,
-        title,
-        genre_ids,
-        overview,
-        release_date,
-        id,
+        original_title="",
+        title="",
+        genre_ids=["no info"],
+        overview="",
+        release_date="......",
+        id="",
       }) => {
         let path;
         if (poster_path) {
