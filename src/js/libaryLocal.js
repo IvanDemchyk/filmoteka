@@ -1,21 +1,25 @@
 import { watche, queue } from './local.js';
 import { createMovieCard } from './createMovieCard';
 import { card } from './local';
+import { watchedLocal } from './watched';
+import { showMovieLibrary } from './modal-window.js';
 
-// const dataWatcheMovie = JSON.parse(localStorage.getItem(WATCHE));
+const divContainer = document.querySelector('#main');
+const header = document.querySelector('.library-header');
 
 export function checkDataRenderPage(data) {
   if (!data || !data.length) {
-    return `<li class="notification">
-            <p class="notification-desc">
+    divContainer.classList.add('notification-bcg');
+    header.classList.add('library-header-notification');
+    return `<p class="notification-desc">
             Nothing here yet, go back and select a movie.
-            </p>
-            <svg class="notification-svg">
-            <use href=""></use>
-            </svg>
-           </li>`;
+            </p>`;
   }
+  header.classList.remove('library-header-notification');
+  divContainer.classList.remove('notification-bcg');
   return createMovieCard(data);
 }
 
-card.insertAdjacentHTML('beforeend', checkDataRenderPage(watche));
+watchedLocal.paginationRender();
+card.addEventListener('click', showMovieLibrary)
+/* card.insertAdjacentHTML('beforeend', checkDataRenderPage(watche)); */

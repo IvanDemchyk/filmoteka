@@ -8,11 +8,7 @@ import { pagination } from './paginFunction.js';
 import { loaderOn } from './loader';
 import { loaderOff } from './loader';
 const paginationBoxElem = document.querySelector('.js-pagination');
-const form = document.querySelector('.form-js');
-const inputEl = document.querySelector('.form-input');
-const notif = document.querySelector('.form__notification');
-
-let globalRequest;
+// let page = 1;
 let currPageGlobe;
 const errorMsg = err => Notify.failure(`${err}`);
 form.addEventListener('submit', inputRequest);
@@ -71,6 +67,7 @@ getMovies().then(data => {
   window.onload = loaderOff();
   pagination(data.page, data.total_pages);
 });
+
 
 paginationBoxElem.addEventListener('click', paginationHandler);
 
