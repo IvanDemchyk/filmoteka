@@ -46,18 +46,19 @@ function toggleClassBtn(classStr, btn, current) {
 
 function localPagWatchedLib(evt) {
    const isWatchedActive = Boolean(document.querySelector('.watched-btn-js.active'));
+   const target = evt.target.textContent;
 
-  if (evt.target.nodeName !== 'LI' || evt.target.textContent === "...") {
+  if (evt.target.nodeName !== 'LI' || target === "...") {
     return;
   }
 
-  if (evt.target.textContent === "🡸") {
+  if (target === "🡸") {
     isWatchedActive ? watchedLocal.pagLeft() : queueLocal.pagLeft();
 
-  } else if (evt.target.textContent === "🡺") {
+  } else if (target === "🡺") {
     isWatchedActive ? watchedLocal.pagRight() : queueLocal.pagRight();
 
   } else {
-    isWatchedActive ? watchedLocal.peakedPage(evt.target.textContent) : queueLocal.peakedPage(evt.target.textContent);
+    isWatchedActive ? watchedLocal.peakedPage(target) : queueLocal.peakedPage(target);
   }  
 }

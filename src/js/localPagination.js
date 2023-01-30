@@ -58,38 +58,39 @@ function paginationLib(currPage, allPages) {
     if (currPage > 1) {
       markupControls += `<li class='arrows arrow-left'>&#129144;</li>`;
       markupControls += `<li class="firstInt">1</li>`;
-      console.log()
     }
+
     if (currPage > 4) {
       markupControls += `<li class="dots">...</li>`;
     }
+
     if (currPage > 3) {
       markupControls += `<li class="two-left">${beforeTwoPages}</li>`;
-      console.log("beforeTwoPages", beforeTwoPages)
     }
+
     if (currPage > 2) {
       markupControls += `<li>${beforeOnePage}</li>`;
-      console.log("beforeOnePage", beforeOnePage)
     }
 
     markupControls += `<li class='active'>${currPage}</li>`;
-    console.log("currPage", currPage);
 
     if (allPages - 1 > currPage) {
       markupControls += `<li >${afterOnePage}</li>`;
-      console.log("afterOnePage", afterOnePage);
     }
+
     if (allPages - 2 > currPage) {
       markupControls += `<li >${afterTwoPage}</li>`;
-      console.log("afterTwoPage", afterTwoPage);
     }
+
     if (allPages - 3 > currPage) {
       markupControls += `<li class="dots">...</li>`;
     }
+
     if (allPages > currPage) {
       markupControls += `<li class="lastInt">${allPages}</li>`;
       markupControls += `<li class='arrows arrow-right'>&#129146</li>`;
     }
+
     paginationLibBox.innerHTML = markupControls;
   }
   

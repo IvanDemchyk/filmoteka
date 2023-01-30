@@ -37,4 +37,4 @@ async function inputRequest(e) {
   }
 }
 const errorMsg = err => Notify.failure(`${err}`);
-/* form.addEventListener('submit', inputRequest); */
+form.addEventListener('submit', inputRequest);
