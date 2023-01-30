@@ -1,5 +1,4 @@
-import { fetchMovies } from './fetchMovie';
-import { CURRENT_MOVIES, WATCHE, QUEUE, watche, queue } from './local.js';
+import { fetchTrends } from './fetchTrends';
 
 const refs = {
   slider: document.querySelector('.slider'),
@@ -12,7 +11,6 @@ refs.btnPrev.addEventListener('click', onClickPrev);
 refs.btnNext.addEventListener('click', onClickNext);
 
 const page = 1;
-// const request = `/day`;
 
 let sliderWidth = refs.sliderList.clientWidth;
 console.log(sliderWidth);
@@ -62,20 +60,10 @@ function createSliderItems(data) {
   return markup;
 }
 
-fetchMovies(page).then(res => {
-  const qvtMovies = res.results.length - 1;
-
-  const popularMovies = [];
-  for (let i = 0; i <= qvtMovies; i++) {
-    if (res.results[i]) {
-      popularMovies.push(res.results[i]);
-    }
-  }
-
-  localStorage.setItem(CURRENT_MOVIES, JSON.stringify(popularMovies));
+fetchTrends(page).then(res => {
+  console.log(res);
   refs.sliderList.insertAdjacentHTML(
     'beforeend',
-    createSliderItems(JSON.parse(localStorage.getItem(CURRENT_MOVIES)))
+    createSliderItems(res.results)
   );
-  console.log(popularMovies);
 });
