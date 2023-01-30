@@ -21,5 +21,5 @@ export function checkDataRenderPage(data) {
 }
 
 watchedLocal.paginationRender();
-
+card.addEventListener('click', showMovieLibrary)
 /* card.insertAdjacentHTML('beforeend', checkDataRenderPage(watche)); */

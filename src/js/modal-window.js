@@ -18,8 +18,7 @@ function showMovieMain(e) {
 }
 
 function showMovieLibrary(e) {
-  const library = watchedOrQueue();
-  const film = getFilmLibrary(e, '.card__item', library);
+  const film = getFilmLibrary(e, '.card__item', watchedOrQueue());
 
   const checkWatched = checkLibrary(watche, film);
   const checkQueue = checkLibrary(queue, film);
