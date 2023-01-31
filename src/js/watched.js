@@ -8,17 +8,16 @@
 //   watchedBtn.classList.add('active');
 //   queueBtn.classList.remove('active');
 // }
-import {LocalPagination, localPagWatched, paginationLibBox} from './localPagination.js'
-import { CURRENT_MOVIES, WATCHE, QUEUE, watche, queue } from './local.js';
+import { LocalPagination, paginationLibBox } from './localPagination.js'
+import { watche, queue } from './local.js';
 import { card } from './local';
 
 const btnWatch = document.querySelector('.watched-btn-js');
 const btnQueue = document.querySelector('.queue-btn-js');
 const containerBtn = document.querySelector('.library-header__buttons');
 
-const CRM = JSON.parse(localStorage.getItem(CURRENT_MOVIES)).results; // test arr
-export const watchedLocal = new LocalPagination(CRM); // test until array  watched will be fulfiled 
-const queueLocal = new LocalPagination(CRM); //test until array  queue will be fulfiled 
+export const watchedLocal = new LocalPagination(watche);
+const queueLocal = new LocalPagination(queue);
 
 containerBtn.addEventListener('click', onClickBtn);
 paginationLibBox.addEventListener("click", localPagWatchedLib);
@@ -35,7 +34,7 @@ function onClickBtn({ target }) {
   if (target.classList.contains('watched-btn-js')) {
     card.innerHTML = '';
     watchedLocal.paginationRender();
-    toggleClassBtn('active', btnWatch, target);
+    toggleClassBtn('active', btnQueue, target);
   }
 }
 
