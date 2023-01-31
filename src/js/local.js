@@ -5,3 +5,4 @@ export const watche = JSON.parse(localStorage.getItem(WATCHE)) || [];
 export const queue = JSON.parse(localStorage.getItem(QUEUE)) || [];
 export const card = document.querySelector('.card');
 export const THEME = 'theme';
+export const LANG = 'language';

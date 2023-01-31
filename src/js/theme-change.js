@@ -29,8 +29,6 @@ function onThemeChange(evt) {
   }
 }
 
-
-
 function storageTheme() {
   if (currentTheme === null) {
     return;
