@@ -10,51 +10,59 @@
 
 .modal-window {
   position: absolute;
+  height: auto;
   top: 20;
   left: 50%;
   background-color: #fff;
   transform: translateX(-50%);
 
-  width: 280px;
-  padding: 48px 20px 40px;
-
-  //для планшета
-
   @media screen and(min-width: 768px) {
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 704px;
-    padding: 40px 72px 40px 36px;
-  }
-
-  @media screen and (min-width: 1280px) {
-    width: 806px;
-    padding: 40px 12px;
   }
 }
 
 .modal-window__close-btn {
+  padding: 0;
   position: absolute;
   top: 8px;
   right: 8px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #ffffff;
+  border: none;
+
+  cursor: pointer;
 }
 
 /*****************************************************/
 
 .modal__movie {
+  width: 280px;
+  padding: 48px 20px 40px;
+
   @media screen and(min-width: 768px) {
     display: flex;
+    width: 704px;
+    height: 552px;
+    padding: 40px 36px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 806px;
+    height: 558px;
+    padding: 40px 12px;
   }
 }
-.movie__img {
-  width: 240px;
-  height: 357px;
-  border-radius: 5px;
+
+.movie__img-container {
   margin-bottom: 20px;
 
   @media screen and(min-width: 768px) {
     width: 264px;
-    height: 374px;
+    // height: 374px;
     margin-bottom: 0;
     margin-right: 68px;
   }
@@ -63,6 +71,17 @@
     width: 375px;
     height: 478px;
     margin-right: 16px;
+  }
+}
+.movie__img {
+  border-radius: 5px;
+  @media screen and(min-width: 768px) {
+    width: 264px;
+    height: 374px;
+  }
+  @media screen and(min-width: 1280px) {
+    width: 375px;
+    height: 478px;
   }
 }
 
@@ -82,7 +101,7 @@
 }
 
 .movie__detail {
-  width: 105px;
+  width: 125px;
 }
 
 .modal-text {
@@ -117,6 +136,14 @@
   color: #ffffff;
 }
 
+.movie__detail-right-column {
+  width: 200px;
+}
+
+.movie__thumb {
+  position: relative;
+}
+
 .movie__about {
   margin-bottom: 8px;
 }
@@ -124,25 +151,39 @@
 .movie__description {
   line-height: 1.67;
   margin-bottom: 20px;
+
+  @media screen and (min-width: 768px) {
+    width: 300px;
+    height: 120px;
+    overflow-y: auto;
+    margin-bottom: 0;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 400px;
+    height: 120px;
+  }
 }
 
 .movie__add-buttons {
   display: flex;
+  flex-wrap: wrap;
   gap: 15px;
+  @media screen and (min-width: 768px) {
+    position: absolute;
+    bottom: 40px;
+  }
 }
 
-.movie__add-btn {
-  // display: block;
-
+.modal__movie-btn {
   padding: 13px 10px;
   width: 110px;
-
-  font-weight: 500;
+  height: 60px;
 
   background-color: transparent;
   border: 1px solid black;
   border-radius: 4px;
 
+  text-transform: uppercase;
   &:hover,
   &:focus {
     border-color: #ff6b01;
@@ -156,5 +197,22 @@
 
   @media screen and (min-width: 1280px) {
     width: 136px;
+  }
+}
+
+.trailer-btn {
+  margin-left: 65px;
+  height: 60px;
+
+  @media screen and (min-width: 768px) {
+    position: absolute;
+    left: 0;
+    margin-left: 0;
+    width: 265px;
+    height: 44px;
+    top: -55px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 287px;
   }
 }
