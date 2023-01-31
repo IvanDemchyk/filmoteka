@@ -1,72 +1,48 @@
-const toolbarElem = document.querySelector('.toolbar');
+import { THEME } from './local.js';
+
 export const controlElem = document.querySelector('.theme__control');
+const toolbarElem = document.querySelector('.toolbar');
 const pagItemElem = document.querySelector('.js-pagination');
-console.log(pagItemElem);
+
+const light = 'light-theme';
+const dark = 'dark-theme';
+
+let currentTheme = localStorage.getItem(THEME);
+storageTheme();
+
 toolbarElem.addEventListener('click', onThemeChange)
 
 function onThemeChange(evt) {
+
   if(evt.target.classList.contains('theme__control')) {
     controlElem.classList.toggle('checked')
-    const liElem = [...pagItemElem.children].forEach(li => {
-      li.classList.toggle('dark')
-    })
   }
 
   if(controlElem.classList.contains('checked')) {
     document.body.classList.remove('light-theme');
     document.body.classList.add('dark-theme');
+    localStorage.setItem(THEME, dark);
   } else {
     document.body.classList.remove('dark-theme');
     document.body.classList.add('light-theme');
-  }
-}
-/* import refs from './refs';
-const { changeThemeBtn } = refs;
-
-const Theme = {
-  LIGHT: 'light-theme',
-  DARK: 'dark-theme',
-};
-
-// console.log(JSON.stringify(Theme));
-
-const light = Theme.LIGHT;
-const dark = Theme.DARK;
-
-let currentTheme = localStorage.getItem('theme');
-cacheChange();
-
-changeThemeBtn.addEventListener('change', onChangeTheme);
-
-function onChangeTheme(event) {
-  event.preventDefault();
-
-  if (!event.target.checked) {
-    toggleTheme(light, dark);
-    localStorage.setItem('theme', light);
-  }
-
-  if (event.target.checked) {
-    toggleTheme(dark, light);
-    localStorage.setItem('theme', dark);
+    localStorage.setItem(THEME, light);
   }
 }
 
-function toggleTheme(currentTheme, nextTheme) {
-  document.body.classList.remove(nextTheme);
-  document.body.classList.add(currentTheme);
-}
 
-function cacheChange() {
+
+function storageTheme() {
   if (currentTheme === null) {
     return;
   }
 
   if (currentTheme === light) {
-    document.body.classList.add(light);
-    changeThemeBtn.checked = false;
+    document.body.classList.remove('dark-theme');
+    document.body.classList.add('light-theme');
+    controlElem.classList.remove('checked');
   } else {
-    document.body.classList.add(dark);
-    changeThemeBtn.checked = true;
+    document.body.classList.remove('light-theme');
+    document.body.classList.add('dark-theme');
+    controlElem.classList.add('checked');
   }
-} */
+}
