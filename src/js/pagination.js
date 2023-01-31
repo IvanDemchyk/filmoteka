@@ -4,6 +4,7 @@ import { fetchTrends } from './fetchTrends.js';
 import { pagination } from './paginFunction.js';
 import { loaderOn } from './loader';
 import { loaderOff } from './loader';
+import { LANG } from './local.js';
 
 export const paginationBoxElem = document.querySelector('.js-pagination');
 const form = document.querySelector('.form-js');
@@ -12,8 +13,7 @@ const notif = document.querySelector('.form__notification');
 let globalRequest;
 let currPageGlobe = 1;
 let page = 1;
-//const errorMsg = err => Notify.failure(`${err}`);
-form.addEventListener('submit', inputRequest);
+let lang = localStorage.getItem(LANG);
 
 async function inputRequest(e) {
   e.preventDefault();
@@ -22,7 +22,7 @@ async function inputRequest(e) {
     return;
   }
   try {
-    const data = await fetchMovies(page, request);
+    const data = await fetchMovies(page, request, lang);
     if (data.results.length === 0) {
       notif.style.visibility = 'visible';
       setTimeout(() => {
@@ -38,11 +38,8 @@ async function inputRequest(e) {
     pagination(data.page, data.total_pages);
   } catch (err) {
     console.log('Error');
-    errorMsg;
   }
 }
-// const errorMsg = err => Notify.failure(`${err}`);
-// form.addEventListener('submit', inputRequest);
 
 async function getMovies(page = 1) {
   let resp;
@@ -79,28 +76,22 @@ function paginationHandler(evt) {
   if (evt.target.textContent === '...') {
     return;
   }
-
   if (evt.target.textContent === '🡸') {
-    // currPageGlobe = JSON.parse(localStorage.getItem('current_movies')).page;
-    console.log('Arrov<-', currPageGlobe);
     getMovies((currPageGlobe -= 1)).then(data => {
       render(data);
       pagination(data.page, data.total_pages);
     });
   } else if (evt.target.textContent === '🡺') {
-    // currPageGlobe = JSON.parse(localStorage.getItem("current_movies")).page;
-    console.log('Arrov>-', currPageGlobe);
     getMovies((currPageGlobe += 1)).then(data => {
       render(data);
       pagination(data.page, data.total_pages);
     });
   } else {
     const actualPage = evt.target.textContent;
-    // currPageGlobe = actualPage;
-    console.log('in current - ', currPageGlobe);
     getMovies(actualPage).then(data => {
       render(data);
       pagination(data.page, data.total_pages);
     });
   }
 }
+form.addEventListener('submit', inputRequest);

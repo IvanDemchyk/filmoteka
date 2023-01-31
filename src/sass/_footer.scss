@@ -1,8 +1,14 @@
 .footer {
+  // background-color: #f7f7f7;
   padding-top: 30px;
   padding-bottom: 30px;
 }
-
+.footer.dark-theme {
+  background-color: #0d0f12;
+}
+.footer.light-theme {
+  background-color: #f7f7f7;
+}
 .footer__container {
   display: flex;
   flex-direction: column;
