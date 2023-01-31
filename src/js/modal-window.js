@@ -1,28 +1,34 @@
 import { CURRENT_MOVIES, watche, queue, WATCHE, QUEUE } from './local.js';
 import { GENRES_MOVIES } from './get-genres';
 
+import { trailerInst } from './trailer';
+
 const backdrop = document.querySelector('.backdrop');
 const modalMovie = document.querySelector('.modal__movie');
 const watchedBtn = document.querySelector('.watched-btn-js');
 
-function showMovieMain(e) {
+async function showMovieMain(e) {
   const film = getFilmMain(e, '.card__item', CURRENT_MOVIES);
 
   const checkWatched = checkLibrary(watche, film);
   const checkQueue = checkLibrary(queue, film);
 
-  createMovieInfo(film, GENRES_MOVIES, checkWatched, checkQueue);
+  const trailerLink = await trailerInst(film.id);
+
+  createMovieInfo(film, GENRES_MOVIES, checkWatched, checkQueue, trailerLink);
   eventListeners(closeModal, addFilm);
   backdrop.hidden = false;
 }
 
-function showMovieLibrary(e) {
+async function showMovieLibrary(e) {
   const film = getFilmLibrary(e, '.card__item', watchedOrQueue());
 
   const checkWatched = checkLibrary(watche, film);
   const checkQueue = checkLibrary(queue, film);
 
-  createMovieInfo(film, GENRES_MOVIES, checkWatched, checkQueue);
+  const trailerLink = await trailerInst(film.id);
+
+  createMovieInfo(film, GENRES_MOVIES, checkWatched, checkQueue, trailerLink);
   eventListeners(closeModal, addFilm);
 
   backdrop.hidden = false;
@@ -43,7 +49,13 @@ function getFilmLibrary(e, element, fromStoarage) {
 }
 
 // розмітка з інфо про фільм у модальному вікні
-function createMovieInfo(movie, genresList, checkWatched, checkQueue) {
+function createMovieInfo(
+  movie,
+  genresList,
+  checkWatched,
+  checkQueue,
+  trailer = ''
+) {
   const modalMovieMarkup = `<div class="movie__img-container">
   <img class='movie__img'
     alt="movie poster"
@@ -88,9 +100,7 @@ function createMovieInfo(movie, genresList, checkWatched, checkQueue) {
       <p class="movie__description modal-text">${movie.overview}</p>
       
       <div class="movie__add-buttons">
-      <button class='modal__movie-btn modal-text modal-text--uppercase trailer-btn' data-movie-id="${
-        movie.id
-      }">watch trailer</button>
+      ${trailer}
         <button class="modal__movie-btn modal-text modal-text--uppercase js-movie__add-btn--watched">${
           checkWatched ? 'remove from ' : 'add to '
         }watched</button>
