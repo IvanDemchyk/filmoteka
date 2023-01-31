@@ -1,4 +1,5 @@
 
+import {controlElem} from './theme-change';
 export let currPageGlobe;
 const paginationBoxElem = document.querySelector('.js-pagination');
 
@@ -47,4 +48,10 @@ export function pagination(currPage, allPages) {
   }
 
   paginationBoxElem.innerHTML = markupControls;
+
+  if(controlElem.classList.contains('checked')) {
+    const liElem = [...paginationBoxElem.children].forEach(li => {
+    li.classList.toggle('dark')
+  })
+}
 }

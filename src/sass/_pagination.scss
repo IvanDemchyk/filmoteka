@@ -30,6 +30,10 @@
 
   border-radius: 5px;
 }
+.js-pagination li.dark,
+.js-pagination-lib li.dark {
+  background-color: #FFFFFF;
+}
 
 .js-pagination li.active,
 .js-pagination-lib li.active {

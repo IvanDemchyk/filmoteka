@@ -7,11 +7,13 @@ import { fetchTrends } from './fetchTrends.js';
 import { pagination } from './paginFunction.js';
 import { loaderOn } from './loader';
 import { loaderOff } from './loader';
+
 const paginationBoxElem = document.querySelector('.js-pagination');
 // let page = 1;
 let currPageGlobe;
+let globalRequest;
 const errorMsg = err => Notify.failure(`${err}`);
-form.addEventListener('submit', inputRequest);
+/* form.addEventListener('submit', inputRequest); */
 
 // search function
 async function inputRequest(e) {
