@@ -1,6 +1,3 @@
-// const API_KEY = '0b11624b950ea9c4284f61844023b09c';
-// const BASE_URL = 'https://api.themoviedb.org/3/trending';
-// const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 import { render } from './render.js';
 import { fetchMovies } from './fetchMovie';
 import { fetchTrends } from './fetchTrends.js';
@@ -8,14 +5,16 @@ import { pagination } from './paginFunction.js';
 import { loaderOn } from './loader';
 import { loaderOff } from './loader';
 
-const paginationBoxElem = document.querySelector('.js-pagination');
-// let page = 1;
-let currPageGlobe;
+export const paginationBoxElem = document.querySelector('.js-pagination');
+const form = document.querySelector('.form-js');
+const inputEl = document.querySelector('.form-input');
+const notif = document.querySelector('.form__notification');
 let globalRequest;
+let currPageGlobe = 1;
+let page = 1;
 const errorMsg = err => Notify.failure(`${err}`);
-/* form.addEventListener('submit', inputRequest); */
+form.addEventListener('submit', inputRequest);
 
-// search function
 async function inputRequest(e) {
   e.preventDefault();
   let request = inputEl.value.trim();
@@ -23,7 +22,7 @@ async function inputRequest(e) {
     return;
   }
   try {
-    const data = await fetchMovies((page = 1), request);
+    const data = await fetchMovies(page, request);
     if (data.results.length === 0) {
       notif.style.visibility = 'visible';
       setTimeout(() => {
@@ -42,16 +41,16 @@ async function inputRequest(e) {
     errorMsg;
   }
 }
-
+const errorMsg = err => Notify.failure(`${err}`);
+form.addEventListener('submit', inputRequest);
 
 async function getMovies(page = 1) {
-  // console.log(globalRequest);
   let resp;
   if (globalRequest) {
     loaderOn();
-    resp = await fetchMovies(currPageGlobe, globalRequest);
-    window.onload = loaderOff();
+    resp = await fetchMovies(page, globalRequest);
     currPageGlobe = resp.page;
+    window.onload = loaderOff();
     return resp;
   } else {
     loaderOn();
@@ -69,7 +68,6 @@ getMovies().then(data => {
   window.onload = loaderOff();
   pagination(data.page, data.total_pages);
 });
-
 
 paginationBoxElem.addEventListener('click', paginationHandler);
 
