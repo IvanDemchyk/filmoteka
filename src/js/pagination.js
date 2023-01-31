@@ -41,8 +41,8 @@ async function inputRequest(e) {
     errorMsg;
   }
 }
-const errorMsg = err => Notify.failure(`${err}`);
-form.addEventListener('submit', inputRequest);
+// const errorMsg = err => Notify.failure(`${err}`);
+// form.addEventListener('submit', inputRequest);
 
 async function getMovies(page = 1) {
   let resp;
