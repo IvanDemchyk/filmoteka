@@ -183,6 +183,7 @@
 
 .modal__movie-btn {
   // padding: 13px 10px;
+  cursor: pointer;
   width: 110px;
   height: 60px;
 
@@ -234,7 +235,8 @@
     width: 100%;
     height: 100%;
     text-decoration: none;
-    cursor: pointer;
+
+    color: #000000;
   }
 
   &:hover a,

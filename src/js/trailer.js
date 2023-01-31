@@ -34,7 +34,7 @@ async function trailerInst(film) {
   }
 
   const trailerObj = await filterNameTrailer(trailerInfo);
-  if (!trailerObj) {
+  if (trailerObj.length === 0) {
     return;
   }
 
