@@ -3,6 +3,7 @@
 // import { pagination } from './paginFunction';
 // import { loaderOn } from './loader';
 // import { loaderOff } from './loader';
+// import {searchLangGlobal} from './lang-switch';
 const form = document.querySelector('.form-js');
 const inputEl = document.querySelector('.form-input');
 const notif = document.querySelector('.form__notification');
@@ -16,7 +17,7 @@ let page = 1;
 //     return;
 //   }
 //   try {
-//     const data = await fetchMovies(page, request);
+//     const data = await fetchMovies(page, request, searchLangGlobal);
 //     // console.log('hello try');
 //     if (data.results.length === 0) {
 //       notif.style.visibility = 'visible';

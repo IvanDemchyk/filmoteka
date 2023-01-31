@@ -1,0 +1,48 @@
+.lang {
+    position: absolute;
+    bottom: 80px;
+    display: inline-flex;
+  
+    padding: 1px;
+    width: 70px;
+    height: 36px;
+  
+    background-color: #ffffff;
+    border-radius: 25px;
+  }
+  
+  .lang__rect{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+  }
+  
+  .lang__control{
+    position: absolute;
+    left: 3px;
+    top: 2px;
+  
+    display: block;
+    width: 32px;
+    height: 32px;
+  
+    background-color: #ff6b08;
+    border-radius: 50%;
+    transition: transform 250ms cubic-bezier(0.075, 0.82, 0.165, 1);
+    cursor: pointer;
+  }
+  
+  .lang__control.checked {
+    transform: translateX(32px);
+  }
+  
+  .lang__value{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    color:#ff6b08;
+  }
+ 

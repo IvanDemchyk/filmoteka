@@ -12,7 +12,7 @@ const notif = document.querySelector('.form__notification');
 let globalRequest;
 let currPageGlobe = 1;
 let page = 1;
-const errorMsg = err => Notify.failure(`${err}`);
+//const errorMsg = err => Notify.failure(`${err}`);
 form.addEventListener('submit', inputRequest);
 
 async function inputRequest(e) {
