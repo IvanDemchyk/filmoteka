@@ -2,10 +2,9 @@ import { CURRENT_MOVIES, watche, queue, WATCHE, QUEUE } from './local.js';
 import { GENRES_MOVIES } from './get-genres';
 
 const backdrop = document.querySelector('.backdrop');
-const modalWindow = document.querySelector('.modal-window');
+const modalMovie = document.querySelector('.modal__movie');
 const watchedBtn = document.querySelector('.watched-btn-js');
-const queueBtn = document.querySelector('.queue-btn-js');
-// відкриття модального вікна з інфо про фільм
+
 function showMovieMain(e) {
   const film = getFilmMain(e, '.card__item', CURRENT_MOVIES);
 
@@ -45,13 +44,12 @@ function getFilmLibrary(e, element, fromStoarage) {
 
 // розмітка з інфо про фільм у модальному вікні
 function createMovieInfo(movie, genresList, checkWatched, checkQueue) {
-  const modalMovieMarkup = `<button class="modal-window__close-btn">close</button>
-
-    <div class="modal__movie" id='${
-      movie.id
-    }'><img class='movie__img' alt="movie poster" src="https://image.tmdb.org/t/p/w500/${
-    movie.poster_path
-  }"/>
+  const modalMovieMarkup = `<div class="movie__img-container">
+  <img class='movie__img'
+    alt="movie poster"
+    src="https://image.tmdb.org/t/p/w500/${movie.poster_path}"
+  />
+</div>
       <div class="movie__info">
       <h2 class="movie__title">${movie.title}</h2>
       <table class="movie__details">
@@ -72,13 +70,13 @@ function createMovieInfo(movie, genresList, checkWatched, checkQueue) {
       </tr>
       <tr>
       <td class="movie__detail modal-text--left-column modal-text">Original title</td>
-      <td class="movie__detail modal-text modal-text--uppercase">${
+      <td class="movie__detail modal-text modal-text--uppercase movie__detail-right-column">${
         movie.original_title
       }</td>
       </tr>
       <tr>
       <td class="movie__detail modal-text--left-column modal-text">Genres</td>
-      <td class="movie__detail modal-text">${genresConvertor(
+      <td class="movie__detail modal-text movie__detail-right-column">${genresConvertor(
         movie.genre_ids,
         genresList
       )}</td>
@@ -88,17 +86,22 @@ function createMovieInfo(movie, genresList, checkWatched, checkQueue) {
           
           <h3 class="movie__about modal-text modal-text--uppercase">About</h3>
       <p class="movie__description modal-text">${movie.overview}</p>
+      
       <div class="movie__add-buttons">
-        <button class="movie__add-btn modal-text modal-text--uppercase js-movie__add-btn--watched">${
+      <button class='modal__movie-btn modal-text modal-text--uppercase trailer-btn' data-movie-id="${
+        movie.id
+      }">watch trailer</button>
+        <button class="modal__movie-btn modal-text modal-text--uppercase js-movie__add-btn--watched">${
           checkWatched ? 'remove from ' : 'add to '
         }watched</button>
-        <button class="movie__add-btn modal-text modal-text--uppercase js-movie__add-btn--queue">${
+        <button class="modal__movie-btn modal-text modal-text--uppercase js-movie__add-btn--queue">${
           checkQueue ? 'remove from ' : 'add to '
         }queue</button>
-      </div><button data-movie-id='${movie.id}'>Trailer</button>
-      </div></div>
+      </div>
+      </div>
   `;
-  modalWindow.innerHTML = modalMovieMarkup;
+  modalMovie.id = movie.id;
+  modalMovie.innerHTML = modalMovieMarkup;
 }
 
 // функції для закриття модального вікна
