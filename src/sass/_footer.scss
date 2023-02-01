@@ -3,12 +3,7 @@
   padding-top: 30px;
   padding-bottom: 30px;
 }
-.footer.dark-theme {
-  background-color: #0d0f12;
-}
-.footer.light-theme {
-  background-color: #f7f7f7;
-}
+
 .footer__container {
   display: flex;
   flex-direction: column;
@@ -46,5 +41,17 @@
   }
   .footer__text {
     line-height: 1.18;
+  }
+  .footer.dark-theme {
+    background-color: #0d0f12;
+  }
+  .footer.light-theme {
+    background-color: #f7f7f7;
+  }
+  .footer.dark-theme p {
+    color: #f7f7f7;
+  }
+  .footer.light-theme p {
+    color: #0d0f12;
   }
 }
