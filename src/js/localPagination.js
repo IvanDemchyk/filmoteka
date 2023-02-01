@@ -7,8 +7,8 @@ export class LocalPagination {
     constructor(category) {
       this.arr = category;
       this.pageNum = 1;
-      this.pageAll = Math.round((this.arr.length - 1 ) / 5);
-      this.pageSize = 5;
+      this.pageAll = Math.round((this.arr.length - 1 ) / 9);
+      this.pageSize = 9;
       this.pagedArr;
     }
     paginate(arr, pageNumber, pageSize) {
@@ -16,7 +16,7 @@ export class LocalPagination {
     }
   
     paginationRender() {
-      if (this.arr.length < 5) {
+      if (this.arr.length < 9) {
         card.innerHTML = checkDataRenderPage(this.arr);
       } else {
         this.pagedArr = this.paginate(this.arr, this.pageNum, this.pageSize);

@@ -1,6 +1,7 @@
 .lang {
     position: absolute;
-    bottom: 80px;
+    bottom: 20px;
+    right: 0px;
     display: inline-flex;
   
     padding: 1px;
@@ -9,6 +10,13 @@
   
     background-color: #ffffff;
     border-radius: 25px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .lang {
+      bottom: 80px;
+      left: 0px;
+    }
   }
   
   .lang__rect{
