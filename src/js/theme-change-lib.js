@@ -1,12 +1,9 @@
 import { THEME } from './local.js';
 import { loaderOn } from './loader';
 import { loaderOff } from './loader';
-export const controlElem = document.querySelector('.theme__control');
-const toolbarElem = document.querySelector('.toolbar');
-const pagItemElem = document.querySelector('.js-pagination');
+export const controlElem = document.querySelector('.theme__control-lib');
+const toolbarElem = document.querySelector('.toolbar-lib');
 const footer = document.querySelector('.footer');
-const card = document.querySelector('.card');
-import { langControlElem } from './lang-switch';
 
 const light = 'light-theme';
 const dark = 'dark-theme';
@@ -19,7 +16,7 @@ toolbarElem.addEventListener('click', onThemeChange);
 function onThemeChange(evt) {
   loaderOn();
   location.reload();
-  if (evt.target.classList.contains('theme__control')) {
+  if (evt.target.classList.contains('theme__control-lib')) {
     controlElem.classList.toggle('checked');
   }
 
@@ -60,5 +57,4 @@ function storageTheme() {
   }
 }
 
-/// на сторінку Бібліотека
 
