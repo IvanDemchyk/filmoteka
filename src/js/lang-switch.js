@@ -1,10 +1,10 @@
 import { card, LANG, logo, library, home } from './local.js';
 
-export const langControlElem = document.querySelector('.lang__control');
+const langControlElem = document.querySelector('.lang__control');
 const langSwithElem = document.querySelector('.lang');
 // const logo = document.querySelector('.page-header__logo-title');
 export let searchLangGlobal;
-
+console.log(langControlElem)
 const ukranian = 'uk-UA';
 const english = 'en-US';
 

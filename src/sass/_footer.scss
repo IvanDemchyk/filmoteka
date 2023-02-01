@@ -34,8 +34,9 @@
   color: #545454;
 }
 
-.js-modal__team {
+.js-team-modal__open {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {
