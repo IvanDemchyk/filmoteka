@@ -56,5 +56,3 @@ function storageTheme() {
     controlElem.classList.add('checked');
   }
 }
-
-

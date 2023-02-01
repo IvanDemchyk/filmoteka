@@ -33,6 +33,17 @@
   padding-bottom: 62px;
 }
 
+.page-header__logo {
+  padding-bottom: 3px;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    padding-bottom: 0;
+    border-bottom: 3px solid #ff001b;
+  }
+}
+
 .page-header__logo-icon {
   display: inline-block;
   width: 24px;
@@ -173,10 +184,8 @@
     line-height: 35px;
     color: #ffffff;
   }
-  .page-header__logo-title:hover,
-  .page-header__logo-title:focus {
-    color: #ff6b08;
-  }
+
+
 
   .form-input {
     width: 336px;
@@ -227,6 +236,7 @@
   background-color: #000000;
   background-image: none;
 }
+
 .home:hover,
 .library:hover,
 .home:focus,
