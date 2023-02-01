@@ -1,4 +1,4 @@
-let preloader = document.querySelector('.preloader');
+export let preloader = document.querySelector('.preloader');
 
 export function loaderOn() {
   preloader.style.display = 'flex';
