@@ -4,9 +4,10 @@ import { fetchTrends } from './fetchTrends.js';
 import { pagination } from './paginFunction.js';
 import { loaderOn } from './loader';
 import { loaderOff } from './loader';
-import { LANG } from './local.js';
+import { LANG, logo, library, home } from './local.js';
 // import { onLangChange } from './lang-switch';
-import { langControlElem } from './lang-switch';
+// import { langControlElem } from './lang-switch';
+const langControlElem = document.querySelector('.lang__control');
 export const paginationBoxElem = document.querySelector('.js-pagination');
 const form = document.querySelector('.form-js');
 const inputEl = document.querySelector('.form-input');
@@ -66,7 +67,17 @@ async function getMovies(page = 1) {
   }
 }
 getMovies().then(data => {
-  langControlElem.classList.toggle('checked');
+  if (langControlElem.classList.contains('checked')) {
+    logo.textContent = 'Фільмотека';
+    library.textContent = 'МОЯ БІБЛІОТЕКА';
+    home.textContent = 'ГОЛОВНА';
+    searchLangGlobal = 'en';
+  } else {
+    logo.textContent = 'Filmoteka';
+    library.textContent = 'MY LIBRARY';
+    home.textContent = 'HOME';
+    searchLangGlobal = 'uk';
+  }
   loaderOn();
   render(data);
   currPageGlobe = data.page;
