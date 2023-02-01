@@ -14,6 +14,7 @@ storageTheme();
 toolbarElem.addEventListener('click', onThemeChange);
 
 function onThemeChange(evt) {
+  evt.preventDefault();
   loaderOn();
   location.reload();
   if (evt.target.classList.contains('theme__control-lib')) {
