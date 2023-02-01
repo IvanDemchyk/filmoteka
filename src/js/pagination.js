@@ -12,6 +12,7 @@ export const paginationBoxElem = document.querySelector('.js-pagination');
 const form = document.querySelector('.form-js');
 const inputEl = document.querySelector('.form-input');
 const notif = document.querySelector('.form__notification');
+let searchLangGlobal;
 let globalRequest;
 let currPageGlobe = 1;
 let page = 1;
@@ -21,7 +22,6 @@ async function inputRequest(e) {
   e.preventDefault();
   let request = inputEl.value.trim();
   lang = localStorage.getItem(LANG);
-  // lang = "en-US";
   if (!request) {
     return;
   }
@@ -67,6 +67,7 @@ async function getMovies(page = 1) {
   }
 }
 getMovies().then(data => {
+  let searchLangGlobal;
   if (langControlElem.classList.contains('checked')) {
     logo.textContent = 'Фільмотека';
     library.textContent = 'МОЯ БІБЛІОТЕКА';
