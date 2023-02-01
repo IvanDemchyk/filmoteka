@@ -5,7 +5,8 @@ import { pagination } from './paginFunction.js';
 import { loaderOn } from './loader';
 import { loaderOff } from './loader';
 import { LANG } from './local.js';
-import { onLangChange } from './lang-switch';
+// import { onLangChange } from './lang-switch';
+import { langControlElem } from './lang-switch';
 export const paginationBoxElem = document.querySelector('.js-pagination');
 const form = document.querySelector('.form-js');
 const inputEl = document.querySelector('.form-input');
@@ -65,6 +66,7 @@ async function getMovies(page = 1) {
   }
 }
 getMovies().then(data => {
+  langControlElem.classList.toggle('checked');
   loaderOn();
   render(data);
   currPageGlobe = data.page;

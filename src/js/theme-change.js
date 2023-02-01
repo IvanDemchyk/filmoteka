@@ -6,6 +6,7 @@ const toolbarElem = document.querySelector('.toolbar');
 const pagItemElem = document.querySelector('.js-pagination');
 const footer = document.querySelector('.footer');
 const card = document.querySelector('.card');
+import { langControlElem } from './lang-switch';
 
 const light = 'light-theme';
 const dark = 'dark-theme';
