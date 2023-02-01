@@ -14,7 +14,7 @@ export const teamCards = [
   },
 
   {
-    picture: `./images/Anastasiya.jpg`,
+    picture: `https://media.licdn.com/dms/image/D4E35AQE-WKf-xR5ZLA/profile-framedphoto-shrink_200_200/0/1671191831476?e=1675879200&v=beta&t=2CRO5Ohd-fctTJy5f_cPUkeLpkjN0d_auzAf0uHJgII`,
     name: 'Anastasia',
     role: 'senior developer',
     ghlink: 'https://github.com/AnastasiiaHudymenko',
@@ -35,7 +35,7 @@ export const teamCards = [
   },
 
   {
-    picture: "./images/Volodymyr.png",
+    picture: './images/Volodymyr.png',
     name: 'Volodymyr',
     role: 'developer',
     ghlink: 'https://github.com/Mar-Volo',

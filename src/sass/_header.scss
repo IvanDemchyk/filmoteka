@@ -173,6 +173,10 @@
     line-height: 35px;
     color: #ffffff;
   }
+  .page-header__logo-title:hover,
+  .page-header__logo-title:focus {
+    color: #ff6b08;
+  }
 
   .form-input {
     width: 336px;
@@ -222,4 +226,10 @@
 .library-header-notification {
   background-color: #000000;
   background-image: none;
+}
+.home:hover,
+.library:hover,
+.home:focus,
+.library:focus {
+  color: #ff6b08;
 }
