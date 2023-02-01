@@ -4,8 +4,10 @@ import { fetchTrends } from './fetchTrends.js';
 import { pagination } from './paginFunction.js';
 import { loaderOn } from './loader';
 import { loaderOff } from './loader';
-import { LANG } from './local.js';
-
+import { LANG, logo, library, home } from './local.js';
+// import { onLangChange } from './lang-switch';
+// import { langControlElem } from './lang-switch';
+const langControlElem = document.querySelector('.lang__control');
 export const paginationBoxElem = document.querySelector('.js-pagination');
 const form = document.querySelector('.form-js');
 const inputEl = document.querySelector('.form-input');
@@ -13,13 +15,20 @@ const notif = document.querySelector('.form__notification');
 let globalRequest;
 let currPageGlobe = 1;
 let page = 1;
-let lang = localStorage.getItem(LANG);
+let lang;
 
 async function inputRequest(e) {
   e.preventDefault();
   let request = inputEl.value.trim();
+  lang = localStorage.getItem(LANG);
+  // lang = "en-US";
   if (!request) {
     return;
+  }
+  if (!lang) {
+    lang = 'en-US';
+  } else {
+    lang = localStorage.getItem(LANG);
   }
   try {
     const data = await fetchMovies(page, request, lang);
@@ -45,7 +54,7 @@ async function getMovies(page = 1) {
   let resp;
   if (globalRequest) {
     loaderOn();
-    resp = await fetchMovies(page, globalRequest);
+    resp = await fetchMovies(page, globalRequest, lang);
     currPageGlobe = resp.page;
     window.onload = loaderOff();
     return resp;
@@ -57,8 +66,18 @@ async function getMovies(page = 1) {
     return resp;
   }
 }
-
 getMovies().then(data => {
+  if (langControlElem.classList.contains('checked')) {
+    logo.textContent = 'Фільмотека';
+    library.textContent = 'МОЯ БІБЛІОТЕКА';
+    home.textContent = 'ГОЛОВНА';
+    searchLangGlobal = 'en';
+  } else {
+    logo.textContent = 'Filmoteka';
+    library.textContent = 'MY LIBRARY';
+    home.textContent = 'HOME';
+    searchLangGlobal = 'uk';
+  }
   loaderOn();
   render(data);
   currPageGlobe = data.page;
