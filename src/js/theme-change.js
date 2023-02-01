@@ -1,9 +1,12 @@
 import { THEME } from './local.js';
-
+import { loaderOn } from './loader';
+import { loaderOff } from './loader';
 export const controlElem = document.querySelector('.theme__control');
 const toolbarElem = document.querySelector('.toolbar');
 const pagItemElem = document.querySelector('.js-pagination');
-const footer = document.querySelector('footer');
+const footer = document.querySelector('.footer');
+const card = document.querySelector('.card');
+
 const light = 'light-theme';
 const dark = 'dark-theme';
 
@@ -13,6 +16,8 @@ storageTheme();
 toolbarElem.addEventListener('click', onThemeChange);
 
 function onThemeChange(evt) {
+  loaderOn();
+  location.reload();
   if (evt.target.classList.contains('theme__control')) {
     controlElem.classList.toggle('checked');
   }
@@ -30,6 +35,7 @@ function onThemeChange(evt) {
     document.body.classList.add('light-theme');
     localStorage.setItem(THEME, light);
   }
+  window.onload = loaderOff();
 }
 
 function storageTheme() {

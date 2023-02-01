@@ -1,7 +1,7 @@
-
-import {controlElem} from './theme-change';
+import { controlElem } from './theme-change';
 export let currPageGlobe;
 const paginationBoxElem = document.querySelector('.js-pagination');
+const cardBoxElem = document.querySelector('.card');
 
 export function pagination(currPage, allPages) {
   let markupControls = '';
@@ -49,9 +49,16 @@ export function pagination(currPage, allPages) {
 
   paginationBoxElem.innerHTML = markupControls;
 
-  if(controlElem.classList.contains('checked')) {
+  if (controlElem.classList.contains('checked')) {
     const liElem = [...paginationBoxElem.children].forEach(li => {
-    li.classList.toggle('dark')
-  })
-}
+      li.classList.toggle('dark');
+    });
+    const liElemCard = [...cardBoxElem.children].forEach(li => {
+      li.classList.toggle('dark-card');
+    });
+  } else {
+    const liElemCardlight = [...cardBoxElem.children].forEach(li => {
+      li.classList.toggle('light-card');
+    });
+  }
 }

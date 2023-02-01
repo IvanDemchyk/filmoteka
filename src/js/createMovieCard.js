@@ -12,9 +12,11 @@ export function createMovieCard(data) {
         id = Date.now(),
       }) => {
         let release;
-        if (release_date === "") {
+        if (release_date === '') {
           release = 'no date';
-        } else {release = release_date.substr(0, 4);}
+        } else {
+          release = release_date.substr(0, 4);
+        }
         let path;
         if (poster_path) {
           path = 'https://image.tmdb.org/t/p/w500/' + poster_path;

@@ -5,7 +5,6 @@ import { pagination } from './paginFunction.js';
 import { loaderOn } from './loader';
 import { loaderOff } from './loader';
 import { LANG } from './local.js';
-
 export const paginationBoxElem = document.querySelector('.js-pagination');
 const form = document.querySelector('.form-js');
 const inputEl = document.querySelector('.form-input');
@@ -13,13 +12,20 @@ const notif = document.querySelector('.form__notification');
 let globalRequest;
 let currPageGlobe = 1;
 let page = 1;
-let lang = localStorage.getItem(LANG);
+let lang;
 
 async function inputRequest(e) {
   e.preventDefault();
   let request = inputEl.value.trim();
+  lang = localStorage.getItem(LANG);
+  // lang = "en-US";
   if (!request) {
     return;
+  }
+  if (!lang) {
+    lang = 'en-US';
+  } else {
+    lang = localStorage.getItem(LANG);
   }
   try {
     const data = await fetchMovies(page, request, lang);
@@ -45,7 +51,7 @@ async function getMovies(page = 1) {
   let resp;
   if (globalRequest) {
     loaderOn();
-    resp = await fetchMovies(page, globalRequest);
+    resp = await fetchMovies(page, globalRequest, lang);
     currPageGlobe = resp.page;
     window.onload = loaderOff();
     return resp;

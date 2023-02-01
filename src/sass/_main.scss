@@ -17,6 +17,37 @@
   color: #000000;
 }
 
+.dark-card h2 {
+  color: white;
+}
+.light-card h2 {
+  color: black;
+}
+
+// .card.light-theme {
+//   background-color: #fff;
+//   color: black;
+// }
+
+// body.dark-theme {
+//   background-color: #111417;
+//   color: #fff;
+// }
+// .card__title:hover,
+// .card__title:focus {
+//   color: #ff6b08;
+// }
+
+.card__title.light-theme {
+  background-color: #fff;
+  color: black;
+}
+
+.card__title.dark-theme {
+  background-color: #111417;
+  color: #fff;
+}
+
 .card__desc {
   font-family: 'Roboto';
   font-style: normal;
@@ -25,7 +56,6 @@
   line-height: 1.33;
   color: #ff6b08;
 }
-
 
 @media screen and (min-width: 768px) {
   .card .card__item {
@@ -59,4 +89,3 @@
   border-radius: 5px;
   margin-bottom: 15px;
 }
-
