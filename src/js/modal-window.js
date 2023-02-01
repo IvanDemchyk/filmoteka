@@ -1,11 +1,16 @@
 import { CURRENT_MOVIES, watche, queue, WATCHE, QUEUE } from './local.js';
 import { GENRES_MOVIES } from './get-genres';
-
+import { createMovieCard } from './createMovieCard';
+import { card } from './local';
 import { trailerInst } from './trailer';
 
 const backdrop = document.querySelector('.backdrop');
 const modalMovie = document.querySelector('.modal__movie');
 const watchedBtn = document.querySelector('.watched-btn-js');
+const libraryHeaderLink = document.querySelector('.js-library');
+const libraryMainContainer = document.querySelector('#main');
+const libraryHeader = document.querySelector('.library-header');
+const librarySlider = document.querySelector('#slider');
 
 async function showMovieMain(e) {
   const film = getFilmMain(e, '.card__item', CURRENT_MOVIES);
@@ -16,20 +21,17 @@ async function showMovieMain(e) {
   const trailerLink = await trailerInst(film.id);
 
   createMovieInfo(film, GENRES_MOVIES, checkWatched, checkQueue, trailerLink);
-  eventListeners(closeModal, addFilm);
+
   backdrop.hidden = false;
 }
 
 async function showMovieLibrary(e) {
   const film = getFilmLibrary(e, '.card__item', watchedOrQueue());
-
   const checkWatched = checkLibrary(watche, film);
   const checkQueue = checkLibrary(queue, film);
-
   const trailerLink = await trailerInst(film.id);
 
   createMovieInfo(film, GENRES_MOVIES, checkWatched, checkQueue, trailerLink);
-  eventListeners(closeModal, addFilm);
 
   backdrop.hidden = false;
 }
@@ -112,6 +114,7 @@ function createMovieInfo(
   `;
   modalMovie.id = movie.id;
   modalMovie.innerHTML = modalMovieMarkup;
+  eventListeners(closeModal, addFilm);
 }
 
 // функції для закриття модального вікна
@@ -127,6 +130,7 @@ const closeModal = {
     if (e.code !== 'Escape') {
       return;
     }
+
     backdrop.hidden = true;
     document.removeEventListener('keydown', this.onEsc);
   },
@@ -174,6 +178,11 @@ function addToWatchedOrQueue(e, element, fromStoarage, local, key, btn) {
   local.push(film);
   localStorage.setItem(key, JSON.stringify(local));
   e.currentTarget.textContent = `remove from ${btn}`;
+  if (libraryHeaderLink.classList.contains('current')) {
+    card.innerHTML = reRenderLibrary(
+      JSON.parse(localStorage.getItem(watchedOrQueue()))
+    );
+  }
 }
 
 function removeFromWatchedOrQueue(e, element, local, key, btn) {
@@ -184,6 +193,11 @@ function removeFromWatchedOrQueue(e, element, local, key, btn) {
   });
   localStorage.setItem(key, JSON.stringify(local));
   e.currentTarget.textContent = `add to ${btn}`;
+  if (libraryHeaderLink.classList.contains('current')) {
+    card.innerHTML = reRenderLibrary(
+      JSON.parse(localStorage.getItem(watchedOrQueue()))
+    );
+  }
 }
 
 // додає та видаляє слухачі подій
@@ -225,4 +239,21 @@ function watchedOrQueue() {
     return QUEUE;
   }
 }
+
+function reRenderLibrary(filmsFromStorage) {
+  if (!filmsFromStorage || !filmsFromStorage.length) {
+    libraryMainContainer.classList.add('notification-bcg');
+    libraryHeader.classList.add('library-header-notification');
+    librarySlider.classList.add('slider-bcg');
+    return `<p class="notification-desc">
+            Nothing here yet, go back and select a movie.
+            </p>`;
+  }
+
+  libraryHeader.classList.remove('library-header-notification');
+  libraryMainContainer.classList.remove('notification-bcg');
+  librarySlider.classList.remove('slider-bcg');
+  return createMovieCard(filmsFromStorage);
+}
+
 export { showMovieMain, showMovieLibrary };
