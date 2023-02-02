@@ -36,7 +36,7 @@ export const teamCards = [
   {
     picture:
       'https://media.licdn.com/dms/image/C5603AQH46TKhOH5GqA/profile-displayphoto-shrink_800_800/0/1660087252778?e=1680739200&v=beta&t=f_b8DybaAJflHPyJ8dHUy7vHjC1aEPtjOOkKYp66hNw',
-    name: 'Sergii',
+    name: 'Serhii',
     role: 'developer',
     ghlink: 'https://github.com/Natoilad',
     linkedinLink: 'https://www.linkedin.com/in/natoilad/',
