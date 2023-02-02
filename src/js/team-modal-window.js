@@ -1,21 +1,15 @@
 import { teamCards } from './team-cards';
 
 const teamModWindOpen = document.querySelector('.js-team-modal__open');
-const teamModWindClose = document.querySelector('.js-team-modal__close');
 const teamModBackdrop = document.querySelector('.js-team__modal-backdrop');
 const team = document.querySelector('.js-team');
 
 teamModWindOpen.addEventListener('click', onModWindOpen);
-teamModWindClose.addEventListener('click', onModWindClose);
+teamModBackdrop.addEventListener('click', onBackdropClick);
 document.addEventListener('keydown', onEsc);
 
 function onModWindOpen() {
   teamModBackdrop.hidden = false;
-  console.log('click');
-}
-// ------ закриття модального вікна ------
-function onModWindClose() {
-  teamModBackdrop.hidden = true;
   console.log('click');
 }
 
@@ -24,16 +18,30 @@ function onEsc(e) {
     return;
   }
   teamModBackdrop.hidden = true;
-  document.removeEventListener('keydown', this.onEsc);
+  document.removeEventListener('keydown', onEsc);
+}
+
+function onBackdropClick(e) {
+  if (e.target.parentElement.nodeName === 'BODY' || e.target.parentElement.nodeName === 'BUTTON') {
+    teamModBackdrop.hidden = true;
+    teamModBackdrop.removeEventListener('click', onBackdropClick);
+  }
 }
 
 // ------------- розмітка карток команди
 
-function teamCardMarkup({ picture, name, role, ghlink }) {
-  const markup = `<li class="js-team__member">
-  <img src=${picture} alt="team members photo" crossorigin class="team-member__photo"><p class="taem-member__name>${name}</p>
+function teamCardMarkup({ picture, name, role, ghlink, linkedinLink }) {
+  const markup = `<li class="team-member">
+  <img src=${picture} alt="team members photo" class="team-member__photo"/>
+  <div class="team-member-card__footer">
+  <div class="team-member-card__caption">
+  <p class="team-member__name">${name}</p>
   <p class="team-member__rol">${role}</p>
-  <a href=${ghlink} class="team-member__github-link link">GitHub</a></li>`;
+  </div>
+  <a href=${ghlink} class="team-member__github-link link" target="blank">GitHub</a>
+  <a href=${linkedinLink} class="team-member__linkedin-link link" target="blank">LinkedIn</a>
+  </div>
+  </li>`;
   return markup;
 }
 

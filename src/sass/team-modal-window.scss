@@ -1,10 +1,12 @@
 .js-team__modal-backdrop {
+  overflow-y: auto;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(105, 104, 104, 0.329);
+  padding-top: 500px;
+  background-color: black;
 }
 
 .js-team-modal__close {
@@ -20,7 +22,7 @@
 }
 
 .modal-close-btn__icon {
-  fill: black;
+  color: #ff6b08;
   width: 20px;
   height: 20px;
   margin: auto;
@@ -36,25 +38,71 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  background-color: #fff;
-  transform: translate(-50%, -50%);
+  background-color: #ff6b08;
+  transform: translate(-50%, -20%);
+}
 
-  &__member {
-    background-color: aquamarine;
-    height: 100px;
-    width: 100%;
+.team-member {
+  border-radius: 7px;
+  background-color: black;
+
+  &__photo {
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+
+  &__name {
+    padding-left: 10px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: white;
+  }
+
+  &__rol {
+    padding-left: 10px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.2;
+    color: #ff6b08;
+  }
+
+  &__github-link {
+    color: white;
+    text-decoration: underline;
+    margin: auto;
+  }
+
+  &__linkedin-link {
+    color: rgb(0, 102, 255);
+    text-decoration: underline;
+    margin: auto;
   }
 }
+
+.team-member-card__footer {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+.team-member:hover {
+  scale: 1.3;
+  transition-duration: 700ms;
+  transition-timing-function: ease-in-out;
+}
+
 //----- для планшета
 
 @media screen and (min-width: 768px) {
   .js-team {
     width: 704px;
+    transform: translate(-50%, -27%);
+  }
 
-    &__member {
-      background-color: aquamarine;
-      width: calc((100% - 10px) / 2);
-    }
+  .team-member {
+    width: calc((100% - 10px) / 2);
   }
 }
 
@@ -63,10 +111,10 @@
 @media screen and (min-width: 1280px) {
   .js-team {
     width: 1280px;
+    transform: translate(-50%, -50%);
+  }
 
-    &__member {
-      background-color: aquamarine;
-      width: calc((100% - 20px) / 3);
-    }
+  .team-member {
+    width: calc((100% - 30px) / 4);
   }
 }
