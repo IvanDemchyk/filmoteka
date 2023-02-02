@@ -1,4 +1,5 @@
-.js-pagination {
+.js-pagination,
+.js-pagination-lib {
   display: flex;
   margin-top: 60px;
   margin-bottom: 60px;
@@ -8,13 +9,15 @@
 
   height: 40px;
 
-  @media (max-width:767px) {
+  @media (max-width: 767px) {
     margin-top: 40px;
     margin-bottom: 40px;
   }
 }
 
-.js-pagination li {
+.js-pagination li,
+.js-pagination-lib li {
+  background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,21 +32,41 @@
 
   border-radius: 5px;
 }
-
-.js-pagination li.active {
-  background-color: #FF6B08;
-  color: #FFFFFF;
+.js-pagination li:hover,
+.js-pagination li:focus,
+.js-pagination-lib li:hover,
+.js-pagination-lib li:focus {
+  background-color: #ff6b08;
+}
+.js-pagination li.dark:hover,
+.js-pagination li.dark:focus,
+.js-pagination-lib li.dark:hover,
+.js-pagination-lib li.dark:focus {
+  background-color: #ff6b08;
+}
+.js-pagination li.dark,
+.js-pagination-lib li.dark {
+  background-color: #ffffff;
 }
 
-.js-pagination li.arrows {
-  background-color: #F7F7F7;
+.js-pagination li.active,
+.js-pagination-lib li.active {
+  background-color: #ff6b08;
+  color: #ffffff;
 }
 
-@media (max-width:767px) {
+.js-pagination li.arrows,
+.js-pagination-lib.arrows {
+  background-color: #f7f7f7;
+}
 
+@media (max-width: 767px) {
   .js-pagination li.dots,
+  .js-pagination-lib.dots,
   .js-pagination li.firstInt,
-  .js-pagination li.lastInt {
+  .js-pagination-lib.firstInt,
+  .js-pagination li.lastInt,
+  .js-pagination-lib.lastInt {
     display: none;
   }
 }

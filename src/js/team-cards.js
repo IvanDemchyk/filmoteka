@@ -43,6 +43,7 @@ export const teamCards = [
   },
 
   {
+
     picture: 'https://media.licdn.com/dms/image/D5603AQHyeXTxvje2iw/profile-displayphoto-shrink_800_800/0/1675335979745?e=1680739200&v=beta&t=FdFb9uRqumcTd7tyUr12sEFmixXLG4xolwjULycGWeA',
     name: 'Volodymyr',
     role: 'developer',
