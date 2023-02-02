@@ -21,7 +21,7 @@ function onEsc(e) {
 }
 
 function onBackdropClick(e) {
-  if (e.target.parentElement.nodeName === 'BODY') {
+  if (e.target.parentElement.nodeName === 'BODY' || e.target.parentElement.nodeName === 'BOTTON') {
     teamModBackdrop.hidden = true;
   }
 }
