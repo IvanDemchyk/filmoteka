@@ -4,6 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Filmoteka</title>
+    <!-- favicon -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./images/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./images/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./images/favicon/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="./images/favicon/safari-pinned-tab.svg"
+      color="#5bbad5"
+    />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
       rel="stylesheet"
@@ -13,9 +39,12 @@
   <body>
     <include src="./partials/library-header.html"></include>
     <main>
+      <include src="./partials/library-slider.html"></include>
       <include src="./partials/library-main.html"></include>
     </main>
     <include src="./partials/footer.html"></include>
+    <include src="./partials/modal-window.html"></include>
+    <script type="module" src="./js/library-slider.js"></script>
     <script type="module" src="./library.js"></script>
   </body>
 </html>
