@@ -43,7 +43,7 @@ export const teamCards = [
   },
 
   {
-    picture: '#',
+    picture: 'https://avatars.githubusercontent.com/u/107374084?v=4',
     name: 'Volodymyr',
     role: 'developer',
     ghlink: 'https://github.com/Mar-Volo',
