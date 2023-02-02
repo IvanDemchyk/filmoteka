@@ -18,13 +18,11 @@ function onEsc(e) {
     return;
   }
   teamModBackdrop.hidden = true;
-  document.removeEventListener('keydown', onEsc);
 }
 
 function onBackdropClick(e) {
-  if (e.target.parentElement.nodeName === 'BODY' || e.target.parentElement.nodeName === 'BUTTON') {
+  if (e.target.parentElement.nodeName === 'BODY') {
     teamModBackdrop.hidden = true;
-    teamModBackdrop.removeEventListener('click', onBackdropClick);
   }
 }
 
