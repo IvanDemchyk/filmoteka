@@ -6,6 +6,9 @@ const toolbarElem = document.querySelector('.toolbar');
 const pagItemElem = document.querySelector('.js-pagination');
 const footer = document.querySelector('.footer');
 const card = document.querySelector('.card');
+const loader = document.querySelector('.preloader');
+const loaderRollerDark = document.querySelector('.lds-roller__dark');
+const loaderRollerLight = document.querySelector('.lds-roller__light');
 import { langControlElem } from './lang-switch';
 
 const light = 'light-theme';
@@ -24,12 +27,24 @@ function onThemeChange(evt) {
   }
 
   if (controlElem.classList.contains('checked')) {
+    loaderRollerDark.classList.remove('dark-theme');
+    loaderRollerDark.classList.add('light-theme');
+    loaderRollerLight.classList.remove('dark-theme');
+    loaderRollerLight.classList.add('light-theme');
+    loader.classList.remove('dark-theme');
+    loader.classList.add('light-theme');
     footer.classList.remove('light-theme');
     footer.classList.add('dark-theme');
     document.body.classList.remove('light-theme');
     document.body.classList.add('dark-theme');
     localStorage.setItem(THEME, dark);
   } else {
+    loaderRollerDark.classList.remove('light-theme');
+    loaderRollerDark.classList.add('dark-theme');
+    loaderRollerLight.classList.remove('light-theme');
+    loaderRollerLight.classList.add('dark-theme');
+    loader.classList.remove('light-theme');
+    loader.classList.add('dark-theme');
     footer.classList.remove('dark-theme');
     footer.classList.add('light-theme');
     document.body.classList.remove('dark-theme');
@@ -45,12 +60,24 @@ function storageTheme() {
   }
 
   if (currentTheme === light) {
+    loaderRollerDark.classList.remove('dark-theme');
+    loaderRollerDark.classList.add('light-theme');
+    loaderRollerLight.classList.remove('dark-theme');
+    loaderRollerLight.classList.add('light-theme');
+    loader.classList.remove('dark-theme');
+    loader.classList.add('light-theme');
     footer.classList.remove('dark-theme');
     footer.classList.add('light-theme');
     document.body.classList.remove('dark-theme');
     document.body.classList.add('light-theme');
     controlElem.classList.remove('checked');
   } else {
+    loaderRollerDark.classList.remove('light-theme');
+    loaderRollerDark.classList.add('dark-theme');
+    loaderRollerLight.classList.remove('light-theme');
+    loaderRollerLight.classList.add('dark-theme');
+    loader.classList.remove('light-theme');
+    loader.classList.add('dark-theme');
     footer.classList.remove('light-theme');
     footer.classList.add('dark-theme');
     document.body.classList.remove('light-theme');
@@ -61,4 +88,3 @@ function storageTheme() {
 }
 
 /// на сторінку Бібліотека
-
