@@ -22,7 +22,7 @@ toolbarElem.addEventListener('click', onThemeChange);
 function onThemeChange(evt) {
   loaderOn();
   location.reload();
-  if (evt.target.classList.contains('theme__control')) {
+  if (evt.target.classList.contains('theme__control') || evt.target.classList.contains('theme__icon-svg') || evt.target.classList.contains('theme__icon')) {
     controlElem.classList.toggle('checked');
   }
 

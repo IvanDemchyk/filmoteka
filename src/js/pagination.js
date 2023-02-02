@@ -5,6 +5,7 @@ import { pagination } from './paginFunction.js';
 import { loaderOn } from './loader';
 import { loaderOff } from './loader';
 import { LANG, logo, library, home } from './local.js';
+import { scrollToTop } from "./btn-up.js";
 // import { onLangChange } from './lang-switch';
 // import { langControlElem } from './lang-switch';
 const langControlElem = document.querySelector('.lang__control');
@@ -100,18 +101,21 @@ function paginationHandler(evt) {
     getMovies((currPageGlobe -= 1)).then(data => {
       render(data);
       pagination(data.page, data.total_pages);
+      scrollToTop();
     });
   } else if (evt.target.textContent === '🡺') {
     getMovies((currPageGlobe += 1)).then(data => {
       render(data);
       pagination(data.page, data.total_pages);
     });
+    scrollToTop();
   } else {
     const actualPage = evt.target.textContent;
     getMovies(actualPage).then(data => {
       render(data);
       pagination(data.page, data.total_pages);
     });
+    scrollToTop();
   }
 }
 form.addEventListener('submit', inputRequest);
