@@ -43,11 +43,11 @@ export const teamCards = [
   },
 
   {
-    picture: 'https://avatars.githubusercontent.com/u/107374084?v=4',
+    picture: 'https://media.licdn.com/dms/image/D5603AQHyeXTxvje2iw/profile-displayphoto-shrink_800_800/0/1675335979745?e=1680739200&v=beta&t=FdFb9uRqumcTd7tyUr12sEFmixXLG4xolwjULycGWeA',
     name: 'Volodymyr',
     role: 'developer',
     ghlink: 'https://github.com/Mar-Volo',
-    linkedinLink: '#',
+    linkedinLink: 'https://www.linkedin.com/in/%D0%B2%D0%BE%D0%BB%D0%BE%D0%B4%D0%B8%D0%BC%D0%B8%D1%80-%D0%BC%D0%B0%D1%80%D1%87%D0%B5%D0%BD%D0%BA%D0%BE-b27788264/',
   },
   {
     picture:
