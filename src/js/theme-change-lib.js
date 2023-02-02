@@ -17,7 +17,7 @@ function onThemeChange(evt) {
   evt.preventDefault();
   loaderOn();
   location.reload();
-  if (evt.target.classList.contains('theme__control-lib')) {
+  if (evt.target.classList.contains('theme__control-lib') || evt.target.classList.contains('theme__icon') || evt.target.classList.contains('theme__icon-lib')) {
     controlElem.classList.toggle('checked');
   }
 

@@ -10,7 +10,7 @@ function listenScroll() {
   scrolled < userHeight ? btnUpElem.classList.add('show') : btnUpElem.classList.remove('show');
 }
 
-function scrollToTop() {
+export function scrollToTop() {
   let scrollStep = window.scrollY / 20;
 
   if (window.scrollY > 0) {
