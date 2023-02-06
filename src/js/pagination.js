@@ -4,20 +4,33 @@ import { fetchTrends } from './fetchTrends.js';
 import { pagination } from './paginFunction.js';
 import { loaderOn } from './loader';
 import { loaderOff } from './loader';
-import { LANG, logo, library, home } from './local.js';
+import { LANG, logo, library, home, CURRENT_MOVIES, GLOBALREQUEST } from './local.js';
 import { scrollToTop } from "./btn-up.js";
 // import { onLangChange } from './lang-switch';
 // import { langControlElem } from './lang-switch';
+const logoElem = document.querySelector('.page-header__logo')
 const langControlElem = document.querySelector('.lang__control');
 export const paginationBoxElem = document.querySelector('.js-pagination');
 const form = document.querySelector('.form-js');
 const inputEl = document.querySelector('.form-input');
 const notif = document.querySelector('.form__notification');
 let searchLangGlobal;
-let globalRequest;
+let globalRequest = localStorage.getItem(GLOBALREQUEST);
 let currPageGlobe = 1;
 let page = 1;
 let lang;
+
+logoElem.addEventListener('click', async () => {
+  globalRequest = null;
+  localStorage.setItem(GLOBALREQUEST, '')
+  page = 1;
+  loaderOn();
+  resp = await fetchTrends(page);
+  currPageGlobe = resp.page;
+  render(resp);
+  window.onload = loaderOff();
+  pagination(resp.page, resp.total_pages);
+})
 
 async function inputRequest(e) {
   e.preventDefault();
@@ -31,6 +44,7 @@ async function inputRequest(e) {
   } else {
     lang = localStorage.getItem(LANG);
   }
+  localStorage.setItem(GLOBALREQUEST, request);
   try {
     const data = await fetchMovies(page, request, lang);
     if (data.results.length === 0) {
@@ -43,6 +57,7 @@ async function inputRequest(e) {
     currPageGlobe = data.page;
     loaderOn();
     render(data);
+    
     window.onload = loaderOff();
     globalRequest = request;
     pagination(data.page, data.total_pages);
@@ -67,6 +82,7 @@ async function getMovies(page = 1) {
     return resp;
   }
 }
+
 getMovies().then(data => {
   let searchLangGlobal;
   if (langControlElem.classList.contains('checked')) {
@@ -82,6 +98,7 @@ getMovies().then(data => {
   }
   loaderOn();
   render(data);
+  
   currPageGlobe = data.page;
   window.onload = loaderOff();
   pagination(data.page, data.total_pages);
