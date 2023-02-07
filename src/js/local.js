@@ -9,3 +9,4 @@ export const home = document.querySelector('.home');
 export const library = document.querySelector('.library');
 export const THEME = 'theme';
 export const LANG = 'language';
+export const GLOBALREQUEST = 'globalrequest';
