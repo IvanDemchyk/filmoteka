@@ -67,3 +67,5 @@ fetchTrends(page).then(res => {
     createSliderItems(res.results)
   );
 });
+
+export { refs };

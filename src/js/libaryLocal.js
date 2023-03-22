@@ -2,7 +2,11 @@ import { watche, queue } from './local.js';
 import { createMovieCard } from './createMovieCard';
 import { card } from './local';
 import { watchedLocal } from './watched';
-import { showMovieLibrary } from './modal-window.js';
+import {
+  showMovieLibrary,
+  showSliderMovie,
+} from './modal-window/showModalWindowFunctions';
+import { refs } from './library-slider';
 
 const divContainer = document.querySelector('#main');
 const header = document.querySelector('.library-header');
@@ -25,4 +29,5 @@ export function checkDataRenderPage(data) {
 
 watchedLocal.paginationRender();
 card.addEventListener('click', showMovieLibrary);
+refs.sliderList.addEventListener('click', showSliderMovie);
 /* card.insertAdjacentHTML('beforeend', checkDataRenderPage(watche)); */
